@@ -10,6 +10,13 @@ label {
   display: block;
 }
 
+#navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
 nav a {
   display: inline-block;
   margin: 1em;
