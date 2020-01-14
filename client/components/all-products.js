@@ -6,23 +6,18 @@ const arrayOfRecords = [
   {
     id: 1,
     name: 'Around The World',
-    artist: 'Weezer',
+    artist: 'David Bowie',
     year: '2002',
-    price: '$33'
+    price: '$33',
+    imgURL: './bowie.jpg'
   },
   {
     id: 2,
     name: 'Upside Down',
-    artist: 'Katy Perry',
+    artist: 'Nirvana',
     year: '2010',
-    price: '$29'
-  },
-  {
-    id: 3,
-    name: 'Pineapples',
-    artist: 'Aerosmith',
-    year: '1990',
-    price: '$35'
+    price: '$29',
+    imgURL: './nirvana.jpg'
   }
 ]
 
@@ -49,14 +44,14 @@ class AllProducts extends React.Component {
             return (
               <Record
                 key={record.id}
-                name={record.name}
+                title={record.title}
                 artist={record.artist}
                 price={record.price}
+                imgURL={record.imgURL}
               />
             )
           })
         )}
-        {/*<Record key={record.id} name={record.name} artist={record.artist} price={record.price} />*/}
       </div>
     )
   }
