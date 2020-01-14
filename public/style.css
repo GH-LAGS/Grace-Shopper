@@ -17,6 +17,11 @@ label {
   align-items: center;
 }
 
+nav {
+  display: flex;
+  flex-direction: row;
+}
+
 nav a {
   display: inline-block;
   margin: 1em;
