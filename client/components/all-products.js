@@ -18,6 +18,22 @@ const arrayOfRecords = [
     year: '2010',
     price: '$29',
     imgURL: './nirvana.jpg'
+  },
+  {
+    id: 3,
+    name: 'Upside Down',
+    artist: 'Katy Perry',
+    year: '2010',
+    price: '$29',
+    imgURL: './katy.jpg'
+  },
+  {
+    id: 4,
+    name: 'Upside Down',
+    artist: 'Green Day',
+    year: '2010',
+    price: '$29',
+    imgURL: './greenday.jpg'
   }
 ]
 
@@ -35,8 +51,6 @@ class AllProducts extends React.Component {
 
     return (
       <div className="container">
-        <h1>ALL RECORDS</h1>
-
         {arrayOfRecords === undefined ? (
           <h3>no records to show yet</h3>
         ) : (
