@@ -17,9 +17,17 @@ label {
   align-items: center;
 }
 
+#left-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
 nav {
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
 nav a {

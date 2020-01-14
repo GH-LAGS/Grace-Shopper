@@ -7,7 +7,10 @@ import {logout} from '../store'
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
     <div id="navbar">
-      <h1>LAGS RECORDS</h1>
+      <div id="left-nav">
+        <h1>LAGS RECORDS</h1>
+        <Link to="/">Shop</Link>
+      </div>
       <nav>
         <div>
           <Link to="/cart">Cart</Link>
