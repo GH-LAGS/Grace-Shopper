@@ -9,7 +9,9 @@ const Navbar = ({handleClick, isLoggedIn}) => (
     <div id="navbar">
       <div id="left-nav">
         <h1>LAGS RECORDS</h1>
-        <Link to="/">Shop</Link>
+        <h3>
+          <Link to="/">Shop</Link>
+        </h3>
       </div>
       <nav>
         <div>
