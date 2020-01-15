@@ -1,14 +1,15 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {addRecordToCart} from '../store/record'
+import {addToCart} from '../store/record'
 
 const Record = props => {
   return (
     <div className="albumContainer">
       <input type="image" src={props.imgURL} className="albumCover" />
-      {/* onClick={props.addToCart(props.id)} */}
       <div className="middle">
-        <div className="addToCartText">ADD TO CART</div>
+        <div className="addToCartText" onClick={props.addToCart(props.id)}>
+          ADD TO CART
+        </div>
       </div>
     </div>
   )
@@ -20,7 +21,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addToCart: recordId => dispatch(addRecordToCart(recordId))
+    addToCart: recordId => dispatch(addToCart(recordId))
   }
 }
 
