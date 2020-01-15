@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import Record from './record'
+import axios from 'axios'
 
 const arrayOfRecords = [
   {
@@ -40,10 +41,13 @@ const arrayOfRecords = [
 class AllProducts extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {records: []}
   }
 
   componentDidMount() {
     // this.props.getRecords()
+    // const {data} = await axios.get('/api/records')
+    // this.setState = {records: data}
   }
 
   render() {
