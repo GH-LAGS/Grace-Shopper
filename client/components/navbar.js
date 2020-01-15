@@ -10,7 +10,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       <div id="left-nav">
         <h1>LAGS RECORDS</h1>
         <h3>
-          <Link to="/">Shop</Link>
+          <Link to="/allproducts">Shop</Link>
         </h3>
       </div>
       <nav>
