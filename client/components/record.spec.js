@@ -18,7 +18,7 @@ describe('Record Component', () => {
         key="1"
         title="Moon"
         artist="Bowie"
-        price="$33"
+        price="33"
         imgURL="./bowie.jpg"
       />
     )
