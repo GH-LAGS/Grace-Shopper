@@ -7,19 +7,10 @@ const Record = props => {
     <div className="albumContainer">
       <input type="image" src={props.record.imgURL} className="albumCover" />
       <div className="middle">
-        <div
-          className="addToCartText"
-          onClick={props.addToCart(props.record.id)}
-        >
-          ADD TO CART
-        </div>
+        <div className="addToCartText">ADD TO CART</div>
       </div>
     </div>
   )
-}
-
-const mapStateToProps = state => {
-  //don't think i need anything here? don't need to listen for changes in cart, list will always look the same
 }
 
 const mapDispatchToProps = dispatch => {
@@ -28,4 +19,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Record)
+export default connect(null, mapDispatchToProps)(Record)

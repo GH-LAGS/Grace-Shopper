@@ -13,7 +13,7 @@ const records = [
     artist: 'Nirvana',
     year: '1991',
     price: 29,
-    imgURL: '.images/nirvana.jpg',
+    imgURL: './images/bowie.jpg',
     genre: 'rock',
     quantity: 10
   },
@@ -49,7 +49,7 @@ const records = [
     artist: 'Roxy Music',
     year: '1972',
     price: 29,
-    imgURL: '.images/roxy.jpg',
+    imgURL: './images/bowie.jpg',
     genre: 'pop',
     quantity: 10
   },
@@ -58,7 +58,7 @@ const records = [
     artist: 'The Beatles',
     year: '1967',
     price: 29,
-    imgURL: '.images/beatles.jpg',
+    imgURL: './images/bowie.jpg',
     genre: 'pop',
     quantity: 10
   }

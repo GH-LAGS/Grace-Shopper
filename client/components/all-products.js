@@ -10,15 +10,12 @@ class AllProducts extends React.Component {
   }
 
   async componentDidMount() {
-    // this.props.getRecords()
     const res = await axios.get('/api/records')
     console.log('GOT RECORDS')
     this.setState({records: res.data})
   }
 
   render() {
-    // const arrayOfRecords = this.props.records.records
-
     return (
       <div className="container">
         {console.log(this.state)}
@@ -26,7 +23,7 @@ class AllProducts extends React.Component {
           <h3>no records to show yet</h3>
         ) : (
           this.state.records.map(record => {
-            return <Record record={record} />
+            return <Record key={record.id} record={record} />
           })
         )}
       </div>
