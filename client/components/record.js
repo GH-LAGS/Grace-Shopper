@@ -5,9 +5,12 @@ import {addToCart} from '../store/record'
 const Record = props => {
   return (
     <div className="albumContainer">
-      <input type="image" src={props.imgURL} className="albumCover" />
+      <input type="image" src={props.record.imgURL} className="albumCover" />
       <div className="middle">
-        <div className="addToCartText" onClick={props.addToCart(props.id)}>
+        <div
+          className="addToCartText"
+          onClick={props.addToCart(props.record.id)}
+        >
           ADD TO CART
         </div>
       </div>
