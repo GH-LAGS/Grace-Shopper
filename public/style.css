@@ -62,12 +62,6 @@ form div {
   opacity: 1;
 }
 
-.addToCartText {
-  color: black;
-  font-size: 16px;
-  padding: 16px 32px;
-}
-
 .albumContainer {
   position: relative;
   width: 50%;

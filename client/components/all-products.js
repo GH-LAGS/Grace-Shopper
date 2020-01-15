@@ -1,12 +1,13 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import Record from './record'
-import axios from 'axios'
 import getAllRecords from '../store'
 
 class AllProducts extends React.Component {
   componentDidMount() {
+    console.log('before comp did mount')
     this.props.getAllRecords()
+    console.log('after')
   }
 
   render() {
