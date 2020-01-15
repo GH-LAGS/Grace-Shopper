@@ -13,7 +13,7 @@ const records = [
     artist: 'Nirvana',
     year: '1991',
     price: 29,
-    imgURL: '.images/nirvana.jpg',
+    imgURL: './images/bowie.jpg',
     genre: 'rock',
     quantity: 10
   },
