@@ -45,3 +45,5 @@ const recordOrder = [
     recordId: 18
   }
 ]
+
+module.exports = recordOrder
