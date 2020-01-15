@@ -23,6 +23,9 @@ const Record = db.define('Record', {
   },
   genre: {
     type: Sequelize.STRING
+  },
+  quantity: {
+    type: Sequelize.INTEGER
   }
 })
 
