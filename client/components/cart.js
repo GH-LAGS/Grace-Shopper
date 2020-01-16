@@ -2,6 +2,7 @@ import React from 'react'
 // import PropTypes from 'prop-types'
 // import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
 
 class Cart extends React.Component {
   // constructor() {
@@ -25,17 +26,17 @@ class Cart extends React.Component {
   }
 }
 
-// const mapState = state => {
-//   return state
-// }
+const mapStateToProps = state => {
+  return {cart: state.cart}
+}
 
-// const mapDispatch = dispatch => {
-//   return {
-//     handleClick {}
-//   }
-// }
+const mapDispatchToProps = dispatch => {
+  return {
+    // handleClick {}
+  }
+}
 
-export default Cart
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)
 
 // TO DO
 // Add prop types
