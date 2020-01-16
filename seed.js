@@ -10,7 +10,7 @@ const seed = async () => {
   const seedRecords = await Record.bulkCreate(records, {returning: true})
   const seedUsers = await User.bulkCreate(users, {returning: true})
   const seedOrders = await Order.bulkCreate(orders, {returning: true})
-  const recordOrderData = await RecordOrder.bulkCreate(recordOrder, {
+  const seedRecordOrders = await RecordOrder.bulkCreate(recordOrder, {
     returning: true
   })
   console.log('Seeding successful')
