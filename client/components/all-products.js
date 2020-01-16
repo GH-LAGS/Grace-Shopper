@@ -2,27 +2,21 @@ import React from 'react'
 import {connect} from 'react-redux'
 import Record from './record'
 import axios from 'axios'
+import {fetchRecords} from '../store/record'
 
 class AllProducts extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {records: []}
-  }
-
-  async componentDidMount() {
-    const res = await axios.get('/api/records')
-    console.log('GOT RECORDS')
-    this.setState({records: res.data})
+  componentDidMount() {
+    this.props.getAllRecords()
   }
 
   render() {
     return (
       <div className="container">
-        {console.log(this.state)}
-        {this.state.records.length === 0 ? (
+        {console.log('THIS.PROPS.RECORDS', this.props.records)}
+        {this.props.records.length === 0 ? (
           <h3>no records to show yet</h3>
         ) : (
-          this.state.records.map(record => {
+          this.props.records.map(record => {
             return <Record key={record.id} record={record} />
           })
         )}
@@ -31,4 +25,18 @@ class AllProducts extends React.Component {
   }
 }
 
-export default AllProducts
+const mapStateToProps = state => {
+  return {
+    records: state.records
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getAllRecords: () => {
+      dispatch(fetchRecords())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllProducts)
