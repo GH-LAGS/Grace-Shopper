@@ -21,3 +21,5 @@ const users = [
     salt: 'z9BJ4hRkR8hxH2m4aYAvgQ=='
   }
 ]
+
+module.exports = users
