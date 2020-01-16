@@ -1,26 +1,43 @@
 import React from 'react'
-import axios from 'axios'
 import {connect} from 'react-redux'
+import {fetchOrders} from '../store/orders'
 // import Order from './ordered-record'
 
 class OrderHistory extends React.Component {
+  componentDidMount() {
+    this.props.getAllOrders()
+  }
+
   render() {
     return (
       <div className="allPastOrders">
         <h1>Past Orders: </h1>
         <div className="singlePastOrder">
-          {/* individual ordered record component */}
-          {this.state.orders.length === 0 ? (
+          {/* {this.state.orders.length === 0 ? (
             <h3>No order history yet!</h3>
           ) : (
-            this.state.orders.map(order => {
+            this.props.order.map(order => {
               return <div key={order.id} order={order} />
             })
-          )}
+          )} */}
         </div>
       </div>
     )
   }
 }
 
-export default OrderHistory
+const mapStateToProps = state => {
+  return {
+    orders: state.orders
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getAllOrders: () => {
+      dispatch(fetchOrders())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderHistory)
