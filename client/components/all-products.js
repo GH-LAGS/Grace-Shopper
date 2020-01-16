@@ -12,7 +12,6 @@ class AllProducts extends React.Component {
   render() {
     return (
       <div className="container">
-        {console.log('THIS.PROPS.RECORDS', this.props.records)}
         {this.props.records.length === 0 ? (
           <h3>no records to show yet</h3>
         ) : (
