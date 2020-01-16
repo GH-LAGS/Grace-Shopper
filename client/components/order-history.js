@@ -1,13 +1,9 @@
 import React from 'react'
 import axios from 'axios'
+import {connect} from 'react-redux'
 // import Order from './ordered-record'
 
 class OrderHistory extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {orders: []}
-  }
-
   render() {
     return (
       <div className="allPastOrders">
