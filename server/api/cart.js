@@ -3,28 +3,31 @@ const {Order, RecordOrder, Record} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
-  try {
-    if (req.user) {
-      console.log(req.user)
+  if (!req.user) {
+    if (req.session.cart) {
+      res.send(req.session.cart)
+    } else {
+      req.session.cart = {Records: []}
+      res.send(req.session.cart)
+    }
+  } else {
+    try {
       const cart = await Order.findOne({
         where: {
-          id: req.user.id,
+          userId: req.user.id,
           status: 'pending'
         },
         include: [{model: Record}]
       })
-      res.json(cart)
-    }
-    if (!req.user) {
-      if (req.session.cart) {
-        res.send(req.session.cart)
+      if (cart) {
+        res.json(cart)
       } else {
-        req.session.cart = {}
-        res.send(req.session.cart)
+        res.send({Records: []})
       }
+    } catch (error) {
+      next(error)
     }
-  } catch (err) {
-    console.log(err)
-    next(err)
   }
 })
+
+//for the view past orders get, use findall and no status validator
