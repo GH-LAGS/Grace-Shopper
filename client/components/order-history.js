@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import Order from './ordered-record'
+// import Order from './ordered-record'
 
 class OrderHistory extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class OrderHistory extends React.Component {
             <h3>No order history yet!</h3>
           ) : (
             this.state.orders.map(order => {
-              return <Order key={order.id} order={order} />
+              return <div key={order.id} order={order} />
             })
           )}
         </div>
