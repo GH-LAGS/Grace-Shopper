@@ -8,7 +8,7 @@ router.get('/', async (req, res, next) => {
       const userOrders = await Order.findOne({
         where: {
           id: req.user.id,
-          status: pending
+          status: 'pending'
         },
         include: [{model: Record}]
       })
