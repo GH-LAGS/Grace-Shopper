@@ -1,4 +1,3 @@
-export default function addRecordToCart(recordId) {}
 //placeholder for reducer and thunk and action creator and action dispatcher
 
 // ACTION TYPES
@@ -14,10 +13,12 @@ const getCart = cart => ({type: GET_CART, cart})
 const addToCart = recordId => ({type: ADD_TO_CART, record})
 const deleteFromCart = recordId => ({type: DELETE_FROM_CART, record})
 
-// REDUCER
-// export default function(state = defaultCart, action) {
-//   switch (action.type) {
-//     case GET_CART:
-//       return action.cart
-//   }
-// }
+//REDUCER
+export default function(state = defaultCart, action) {
+  switch (action.type) {
+    default:
+      return state
+    // case GET_CART:
+    //   return action.cart
+  }
+}

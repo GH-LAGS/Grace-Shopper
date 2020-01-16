@@ -4,15 +4,19 @@ const db = require('../db')
 const Order = db.define('Order', {
   date: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   totalPrice: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   },
   address: {
     type: Sequelize.TEXT,
-    allowNull: false
+    allowNull: true
+  },
+  status: {
+    type: Sequelize.STRING,
+    allowNull: true
   }
 })
 
