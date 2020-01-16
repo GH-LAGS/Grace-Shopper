@@ -1,14 +1,15 @@
 import React from 'react'
+import {Grommet} from 'grommet'
 
 import {Navbar} from './components'
 import Routes from './routes'
 
 const App = () => {
   return (
-    <div>
+    <Grommet plain>
       <Navbar />
       <Routes />
-    </div>
+    </Grommet>
   )
 }
 

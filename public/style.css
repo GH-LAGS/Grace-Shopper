@@ -58,6 +58,11 @@ form div {
   text-align: center;
 }
 
+.container {
+  display: flex;
+  flex-flow: row wrap;
+}
+
 .container:hover .middle {
   opacity: 1;
 }
