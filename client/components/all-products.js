@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import Record from './record'
 import axios from 'axios'
 import {fetchRecords} from '../store/record'
+import {Grommet, Box, Grid, Text, Button} from 'grommet'
 
 class AllProducts extends React.Component {
   componentDidMount() {
@@ -12,7 +13,6 @@ class AllProducts extends React.Component {
   render() {
     return (
       <div className="container">
-        {console.log('THIS.PROPS.RECORDS', this.props.records)}
         {this.props.records.length === 0 ? (
           <h3>no records to show yet</h3>
         ) : (

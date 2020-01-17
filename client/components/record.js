@@ -1,15 +1,31 @@
 import React from 'react'
 import {connect} from 'react-redux'
 // import {addToCart} from '../store/record'
+import {Grommet, Box, Grid, Text, Button} from 'grommet'
 
 export const Record = props => {
   return (
-    <div className="albumContainer">
+    <Box
+      direction="column"
+      justify="center"
+      align="center"
+      pad="large"
+      background="#5B4037"
+      gap="xsmall"
+      round="small"
+      margin="medium"
+      basis="medium"
+    >
       <input type="image" src={props.record.imgURL} className="albumCover" />
-      <div className="middle">
-        {/* <div className="addToCartText">ADD TO CART</div> */}
-      </div>
-    </div>
+      <Text direction="row-responsive" justify="center" weight="">
+        {props.record.title}
+      </Text>
+      <Text direction="row-responsive" justify="center">
+        {props.record.artist}
+      </Text>
+      <Text direction="row-responsive" justify="center">{`$${props.record
+        .price / 100}`}</Text>
+    </Box>
   )
 }
 
