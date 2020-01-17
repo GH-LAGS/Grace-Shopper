@@ -15,16 +15,26 @@ describe('Record Component', () => {
   beforeEach(() => {
     record = shallow(
       <Record
-        key="1"
-        title="Moon"
-        artist="Bowie"
-        price="$33"
-        imgURL="./bowie.jpg"
+        key={1}
+        record={{
+          title: 'Aladdin Sane',
+          artist: 'David Bowie',
+          year: 1973,
+          imgURL: './images/bowie.jpg',
+          price: 3300,
+          genre: 'rock',
+          quantity: 10
+        }}
       />
     )
   })
-
-  it('renders Add To Cart text', () => {
+  xit('renders Add To Cart text', () => {
     expect(record.find('div').innerHTML()).to.be.equal('ADD TO CART')
   })
+  it('renders the album cover', () => {
+    expect(record.find('input').prop('src')).to.be.equal('./images/bowie.jpg')
+  })
+  it('renders the record title', () => {
+    expect(record.contains('Aladdin Sane')).to.equal(true)
+  }) // merge pull request, pull to branch and check test
 })

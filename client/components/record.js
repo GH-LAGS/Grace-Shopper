@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 // import {addToCart} from '../store/record'
 
-const Record = props => {
+export const Record = props => {
   return (
     <div className="albumContainer">
       <input type="image" src={props.record.imgURL} className="albumCover" />
