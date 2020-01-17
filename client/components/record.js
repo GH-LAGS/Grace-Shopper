@@ -17,6 +17,7 @@ const Record = props => {
       basis="medium"
     >
       <input type="image" src={props.record.imgURL} className="albumCover" />
+ feature-style-react-record
       <Text direction="row-responsive" justify="center" weight="">
         {props.record.title}
       </Text>
@@ -26,6 +27,10 @@ const Record = props => {
       <Text direction="row-responsive" justify="center">{`$${props.record
         .price / 100}`}</Text>
     </Box>
+      <div className="middle">
+        <div className="addToCartText">ADD TO CART</div>
+      </div>
+    </div>
   )
 }
 
