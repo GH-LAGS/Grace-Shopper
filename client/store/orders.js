@@ -7,7 +7,7 @@ const GET_ALL_ORDERS = 'GET_ALL_ORDERS'
 const initialState = []
 
 // ACTION CREATORS
-const gotAllOrders = orders => ({
+export const gotAllOrders = orders => ({
   type: GET_ALL_ORDERS,
   orders
 })
