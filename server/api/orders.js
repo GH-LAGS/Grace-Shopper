@@ -7,7 +7,7 @@ router.get('/', async (req, res, next) => {
     if (req.user.id) {
       const userOrders = await Order.findAll({
         where: {
-          id: req.user.id,
+          userId: req.user.id,
           status: 'completed'
         },
         include: [{model: Record}]
