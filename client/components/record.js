@@ -7,7 +7,7 @@ const Record = props => {
     <div className="albumContainer">
       <input type="image" src={props.record.imgURL} className="albumCover" />
       <div className="middle">
-        {/* <div className="addToCartText">ADD TO CART</div> */}
+        <div className="addToCartText">ADD TO CART</div>
       </div>
     </div>
   )

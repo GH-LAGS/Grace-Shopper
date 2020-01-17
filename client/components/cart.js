@@ -3,19 +3,29 @@ import React from 'react'
 // import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+import {fetchCart} from '../store/cart'
 
 class Cart extends React.Component {
-  // constructor() {
-  //   super()
-  // }
+  componentDidMount() {
+    this.props.getCart()
+  }
 
   render() {
     return (
       <div>
-        <h1>Shoping Cart</h1>
-        <div>
-          <p>Your shopping cart is empty.</p>
-        </div>
+        {console.log('in component', this.props)}
+        <h1>Shopping Cart</h1>
+        {this.props.cart.cart === undefined ? (
+          <h4>'waiting for cart'</h4>
+        ) : (
+          // this.props.cart.cart.length === 0 ?
+          //   (<p>Your shopping cart is empty.</p>)
+          // :
+
+          this.props.cart.cart.map(record => {
+            return <h4 key={record.id}>{record.title}</h4>
+          })
+        )}
         <button type="button" id="checkout">
           Checkout
         </button>
@@ -27,12 +37,17 @@ class Cart extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return {cart: state.cart}
+  return {
+    cart: state.cart,
+    user: state.user
+  }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    // handleClick {}
+    getCart: () => {
+      dispatch(fetchCart())
+    }
   }
 }
 

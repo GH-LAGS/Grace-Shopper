@@ -1,24 +1,33 @@
+import Axios from 'axios'
+import {runInNewContext} from 'vm'
+
 //placeholder for reducer and thunk and action creator and action dispatcher
 
 // ACTION TYPES
 const GET_CART = 'GET_CART'
-const ADD_TO_CART = 'ADD_TO_CART'
-const DELETE_FROM_CART = 'DELETE_FROM_CART'
 
 // INITIAL STATE
 const defaultCart = []
 
 // ACTION CREATORS
-const getCart = cart => ({type: GET_CART, cart})
-const addToCart = recordId => ({type: ADD_TO_CART, record})
-const deleteFromCart = recordId => ({type: DELETE_FROM_CART, record})
+const gotCart = cart => ({type: GET_CART, cart})
+
+//THUNK
+export const fetchCart = () => async dispatch => {
+  try {
+    const res = await Axios.get('/api/cart')
+    dispatch(gotCart(res.data.Records))
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 //REDUCER
 export default function(state = defaultCart, action) {
   switch (action.type) {
+    case GET_CART:
+      return {...state, cart: action.cart}
     default:
       return state
-    // case GET_CART:
-    //   return action.cart
   }
 }
