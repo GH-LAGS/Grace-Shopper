@@ -74,7 +74,6 @@ describe('cart thunk creators', () => {
       mockAxios.onGet('/api/cart').replyOnce(200, fakeCart)
       await store.dispatch(fetchCart())
       const actions = store.getActions()
-      console.log('ACTIONS', actions)
       expect(actions[0].type).to.be.equal('GET_CART')
       expect(actions[0].cart).to.be.deep.equal(fakeCart.Records)
     })

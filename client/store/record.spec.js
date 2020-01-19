@@ -56,7 +56,6 @@ describe('records thunk creators', () => {
       mockAxios.onGet('/api/records').replyOnce(200, fakeRecords)
       await store.dispatch(fetchRecords())
       const actions = store.getActions()
-      console.log(actions)
       expect(actions[0].type).to.be.equal('GET_ALL_RECORDS')
       expect(actions[0].records).to.be.deep.equal(fakeRecords)
     })
