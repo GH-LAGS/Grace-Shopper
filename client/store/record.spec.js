@@ -4,7 +4,6 @@ import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import configureMockStore from 'redux-mock-store'
 import thunkMiddleware from 'redux-thunk'
-import history from '../history'
 
 const middlewares = [thunkMiddleware]
 const mockStore = configureMockStore(middlewares)
@@ -57,6 +56,7 @@ describe('records thunk creators', () => {
       mockAxios.onGet('/api/records').replyOnce(200, fakeRecords)
       await store.dispatch(fetchRecords())
       const actions = store.getActions()
+      console.log(actions)
       expect(actions[0].type).to.be.equal('GET_ALL_RECORDS')
       expect(actions[0].records).to.be.deep.equal(fakeRecords)
     })

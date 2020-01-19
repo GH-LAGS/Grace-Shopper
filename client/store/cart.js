@@ -1,8 +1,6 @@
 import Axios from 'axios'
 import {runInNewContext} from 'vm'
 
-//placeholder for reducer and thunk and action creator and action dispatcher
-
 // ACTION TYPES
 const GET_CART = 'GET_CART'
 
