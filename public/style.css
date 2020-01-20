@@ -109,6 +109,10 @@ form div {
   padding: 3%;
 }
 
+.allPastOrders h3 {
+  text-align: center;
+}
+
 hr {
   width: 80%;
   height: 3px;
@@ -117,7 +121,6 @@ hr {
   background: #5b4037;
   border-width: 0px;
 }
-
 #totalPrice {
   text-align: end;
 }
