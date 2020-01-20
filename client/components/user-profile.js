@@ -6,7 +6,7 @@ import OrderHistory from './order-history'
 /**
  * COMPONENT
  */
-export const UserHome = props => {
+export const userprofile = props => {
   const {email} = props
 
   return (
@@ -26,11 +26,11 @@ const mapState = state => {
   }
 }
 
-export default connect(mapState)(UserHome)
+export default connect(mapState)(userprofile)
 
 /**
  * PROP TYPES
  */
-UserHome.propTypes = {
+userprofile.propTypes = {
   email: PropTypes.string
 }

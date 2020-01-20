@@ -7,38 +7,44 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
-  <Header background="dark-1" pad="medium">
+  <Header background="#D85434" pad="medium">
     <Box direction="row" align="center" gap="small">
-      <div id="left-nav">
+      <Link to="/allproducts" className="navLink" id="name">
         <h1>LAGS RECORDS</h1>
-        <h3>
-          <Link to="/allproducts">Shop</Link>
-        </h3>
-      </div>
+      </Link>
     </Box>
-    <div id="navbar">
-      <Nav>
+
+    <nav>
+      <div>
+        <Link to="/cart" className="navLink">
+          Cart
+        </Link>
+        <Link to="/allproducts" className="navLink">
+          Shop
+        </Link>
+      </div>
+      {isLoggedIn ? (
         <div>
-          <Link to="/cart">Cart</Link>
+          {/* The navbar will show these links after you log in */}
+          <Link to="/home" className="navLink">
+            Profile
+          </Link>
+          <a href="#" onClick={handleClick} className="navLink">
+            Logout
+          </a>
         </div>
-        {isLoggedIn ? (
-          <div>
-            {/* The navbar will show these links after you log in */}
-            <Link to="/home">Home</Link>
-            <a href="#" onClick={handleClick}>
-              Logout
-            </a>
-          </div>
-        ) : (
-          <div>
-            {/* The navbar will show these links before you log in */}
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
-          </div>
-        )}
-      </Nav>
-    </div>
-    <hr />
+      ) : (
+        <div>
+          {/* The navbar will show these links before you log in */}
+          <Link to="/login" className="navLink">
+            Login
+          </Link>
+          <Link to="/signup" className="navLink">
+            Sign Up
+          </Link>
+        </div>
+      )}
+    </nav>
   </Header>
 )
 
