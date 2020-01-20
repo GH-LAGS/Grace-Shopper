@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import Record from './record'
+import Featured from './featured-items'
 import axios from 'axios'
 import {fetchRecords} from '../store/record'
 import {Grommet, Box, Grid, Text, Button} from 'grommet'
@@ -20,6 +21,12 @@ class AllProducts extends React.Component {
             return <Record key={record.id} record={record} />
           })
         )}
+        <hr />
+        <h3 id="recommendations">
+          {' '}
+          Not sure what to buy? Here's what our editors like!
+        </h3>
+        <Featured />
       </div>
     )
   }
