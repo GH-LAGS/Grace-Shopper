@@ -4,16 +4,16 @@ import {expect} from 'chai'
 import React from 'react'
 import enzyme, {shallow} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import {userprofile} from './user-profile'
+import {UserProfile} from './user-profile'
 
 const adapter = new Adapter()
 enzyme.configure({adapter})
 
-describe('userprofile', () => {
+describe('UserProfile Component', () => {
   let userprofile
 
   beforeEach(() => {
-    userprofile = shallow(<userprofile email="cody@email.com" />)
+    userprofile = shallow(<UserProfile email="cody@email.com" />)
   })
 
   it('renders the email in an h3', () => {
