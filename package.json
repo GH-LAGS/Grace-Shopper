@@ -1,7 +1,7 @@
 {
   "name": "grace-shopper",
   "version": "2.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "Ecommerce website for buying vinyls",
   "engines": {
     "node": ">= 7.0.0"
   },
@@ -38,7 +38,7 @@
       "git add"
     ]
   },
-  "author": "Fullstack Academy of Code",
+  "author": "LAGS",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.19.1",
@@ -46,7 +46,7 @@
     "connect-session-sequelize": "^6.0.0",
     "express": "^4.16.4",
     "express-session": "^1.17.0",
-    "grommet": "^2.9.0",
+    "grommet": "^2.10.0",
     "history": "^4.10.1",
     "morgan": "^1.9.1",
     "passport": "^0.4.1",
