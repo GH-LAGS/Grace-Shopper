@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {Anchor, Grommet, Nav, Header, Box} from 'grommet'
-import {grommet} from 'grommet/themes'
+import {Header, Box} from 'grommet'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
