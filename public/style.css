@@ -111,9 +111,11 @@ form div {
 
 hr {
   width: 80%;
+  height: 3px;
   margin-left: auto;
   margin-right: auto;
   background: #5b4037;
+  border-width: 0px;
 }
 
 #totalPrice {
