@@ -105,3 +105,17 @@ form div {
   font-size: 16px;
   padding: 16px 32px;
 }
+.allPastOrders {
+  padding: 3%;
+}
+
+hr {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  background: #5b4037;
+}
+
+#totalPrice {
+  text-align: end;
+}
