@@ -17,7 +17,7 @@ export const Record = props => {
       basis="medium"
     >
       <input type="image" src={props.record.imgURL} className="albumCover" />
-      <Text direction="row-responsive" justify="center" weight="">
+      <Text direction="row-responsive" justify="center" weight="bold">
         {props.record.title}
       </Text>
       <Text direction="row-responsive" justify="center">

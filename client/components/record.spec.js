@@ -36,5 +36,5 @@ describe('Record Component', () => {
   })
   it('renders the record title', () => {
     expect(record.contains('Aladdin Sane')).to.equal(true)
-  }) // merge pull request, pull to branch and check test
+  })
 })
