@@ -1,19 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import {Anchor, Grommet, Nav, Header, Box} from 'grommet'
+import {grommet} from 'grommet/themes'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <div id="navbar">
+  <Header background="dark-1" pad="medium">
+    <Box direction="row" align="center" gap="small">
       <div id="left-nav">
         <h1>LAGS RECORDS</h1>
         <h3>
           <Link to="/allproducts">Shop</Link>
         </h3>
       </div>
-      <nav>
+    </Box>
+    <div id="navbar">
+      <Nav>
         <div>
           <Link to="/cart">Cart</Link>
         </div>
@@ -32,15 +36,13 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             <Link to="/signup">Sign Up</Link>
           </div>
         )}
-      </nav>
+      </Nav>
     </div>
     <hr />
-  </div>
+  </Header>
 )
 
-/**
- * CONTAINER
- */
+// CONTAINER
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id
@@ -57,9 +59,7 @@ const mapDispatch = dispatch => {
 
 export default connect(mapState, mapDispatch)(Navbar)
 
-/**
- * PROP TYPES
- */
+// PROP TYPES
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired
