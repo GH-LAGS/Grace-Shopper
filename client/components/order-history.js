@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {fetchOrders} from '../store/orders'
 // import Order from './ordered-record'
 
-class OrderHistory extends React.Component {
+export class OrderHistory extends React.Component {
   componentDidMount() {
     this.props.getAllOrders()
   }

@@ -2,13 +2,13 @@ import Axios from 'axios'
 import {runInNewContext} from 'vm'
 
 // ACTION TYPES
-const GET_CART = 'GET_CART'
+const GOT_CART = 'GOT_CART'
 
 // INITIAL STATE
 const defaultCart = []
 
 // ACTION CREATORS
-const gotCart = cart => ({type: GET_CART, cart})
+const gotCart = cart => ({type: GOT_CART, cart})
 
 //THUNK
 export const fetchCart = () => async dispatch => {
@@ -23,7 +23,7 @@ export const fetchCart = () => async dispatch => {
 //REDUCER
 export default function(state = defaultCart, action) {
   switch (action.type) {
-    case GET_CART:
+    case GOT_CART:
       return {...state, cart: action.cart}
     default:
       return state
