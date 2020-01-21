@@ -4,6 +4,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchCart} from '../store/cart'
+import {Order} from './single-cart'
 
 class Cart extends React.Component {
   constructor() {
@@ -15,31 +16,37 @@ class Cart extends React.Component {
   }
 
   render() {
+    let total = 0
     return (
-      <div>
-        {console.log('in component', this.props.cart[0].cartQuantity)}
-        <h1>Shopping Cart</h1>
-        {this.props.cart === undefined ? (
-          <h4>'waiting for cart'</h4>
-        ) : (
-          // this.props.cart.cart.length === 0 ?
-          //   (<p>Your shopping cart is empty.</p>)
-          // :
+      <div className="allPastOrders">
+        <h1>Cart: </h1>
+        <hr />
+        <div className="singlePastOrder">
+          {this.props.cart === undefined ? (
+            <h3>Nothing in your cart yet!</h3>
+          ) : (
+            this.props.cart.map(record => {
+              total += record.RecordOrder.soldPrice / 100
+              return (
+                <div key={record.id} record={record}>
+                  <Order
+                    key={record.id}
+                    record={record}
+                    className="OrderHistory"
+                  />
+                  <hr />
+                </div>
+              )
+            })
+          )}
+          <h3 id="totalPrice">Total Price: {`$${total}`}</h3>
+          <button type="button" id="checkout">
+            Checkout
+          </button>
+          <br />
+          <Link to="/preview">Order Preview Page</Link>
+        </div>
 
-          this.props.cart.map(record => {
-            console.log(record)
-            return (
-              <h4 key={record.id}>
-                {record.title} {record.cartQuantity}
-              </h4>
-            )
-          })
-        )}
-        <button type="button" id="checkout">
-          Checkout
-        </button>
-        <p>This button, once implemented will link to order preview page.</p>
-        <Link to="/preview">Order Preview Page</Link>
       </div>
     )
   }
@@ -61,9 +68,3 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart)
-
-// TO DO
-// Add prop types
-// Navbar.propTypes = {
-//   handleClick: PropTypes.func.isRequired,
-// }
