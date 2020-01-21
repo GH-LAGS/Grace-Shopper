@@ -10,7 +10,11 @@ const defaultCart = []
 
 // ACTION CREATORS
 const gotCart = cart => ({type: GOT_CART, cart})
-const addedToCart = record => ({type: ADD_TO_CART, record})
+const addedToCart = (record, quantity) => ({
+  type: ADD_TO_CART,
+  record,
+  quantity
+})
 const updateQuantity = record => ({type: UPDATE_QUANTITY, record})
 
 //THUNK

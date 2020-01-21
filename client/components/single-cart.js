@@ -1,5 +1,5 @@
 import React from 'react'
-import {Grommet, Box, Text, Image} from 'grommet'
+import {Grommet, Button, Box, Text, Image} from 'grommet'
 
 export const Order = props => {
   return (
@@ -37,6 +37,12 @@ export const Order = props => {
       <Text direction="row-responsive" justify="center">
         Qty: {props.record.RecordOrder.quantity}
       </Text>
+      <Button direction="row-responsive" justify="center">
+        Add
+      </Button>
+      <Button direction="row-responsive" justify="center">
+        Delete
+      </Button>
       <Text direction="row-responsive" justify="center">
         Price: {`$${props.record.RecordOrder.soldPrice / 100}`}
       </Text>
