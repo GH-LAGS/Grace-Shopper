@@ -25,6 +25,9 @@ export const Record = props => {
       </Text>
       <Text direction="row-responsive" justify="center">{`$${props.record
         .price / 100}`}</Text>
+      <Button direction="row-responsive" justify="center">
+        Add To Cart
+      </Button>
     </Box>
   )
 }
