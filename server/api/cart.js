@@ -32,31 +32,17 @@ router.get('/', async (req, res, next) => {
 
 router.post('/:id', async (req, res, next) => {
   const id = req.params.id
+  //find record matching id
+  const foundRecord = await Record.findOne({
+    where: {
+      id: id
+    }
+  })
+
   try {
-    //find record matching id
-    const foundRecord = await Record.findOne({
-      where: {
-        id: id
-      }
-    })
-
-    //create new row in Record
-    //!!THIS IS WHERE WE WOULD AFFECT QUANTITY - DOES THE RECORD ALREADY EXIST IN CART? IF SO, SIMPLY CHANGE QUANTITY, DO NOT ADD WHOLE NEW RECORDORDER
-    const newRecordOrder = await RecordOrder.create({
-      quantity: 1,
-      soldPrice: foundRecord.price
-    })
-    //assign recordorder to record
-    newRecordOrder.belongsTo(foundRecord)
-
+    let recordOrder
     //if logged in
     if (req.user) {
-      //find user
-      const foundUser = await User.findOne({
-        where: {
-          id: req.user.id
-        }
-      })
       //find cart using user id
       const foundCart = await Order.findOne({
         where: {
@@ -65,29 +51,64 @@ router.post('/:id', async (req, res, next) => {
         },
         include: [{model: Record}]
       })
+
       //if cart doesn't exist
       if (!foundCart) {
         //create new order
         const newCart = await Order.create({
-          status: 'pending'
+          status: 'pending',
+          userId: req.user.id
         })
-        //create relationship to user
-        newCart.belongsTo(foundUser)
-        //create relationship of recordorder to order
-        newRecordOrder.belongsTo(newCart)
+        //create new row in RecordOrder and assign foreign
+        recordOrder = await RecordOrder.create({
+          quantity: 1,
+          soldPrice: foundRecord.price,
+          recordId: foundRecord.id,
+          orderId: newCart.id
+        })
       } else {
-        //create relationship of foundcart to existing cart
-        newRecordOrder.belongsTo(foundCart)
+        console.log('in duplicate else statement')
+        //check cart for if recordOrder matching record id already exists
+        const duplicate = await RecordOrder.findOne({
+          where: {
+            orderId: foundCart.id,
+            recordId: foundRecord.id
+          }
+        })
+
+        if (duplicate) {
+          await duplicate.update({
+            quantity: duplicate.quantity + 1 //check this later
+          })
+          res.send({record: foundRecord, recordOrder, isDuplicate: true})
+        } else {
+          //create new row in RecordOrder and assign foreign
+          recordOrder = await RecordOrder.create({
+            quantity: 1,
+            soldPrice: foundRecord.price,
+            recordId: foundRecord.id,
+            orderId: foundCart.id
+          })
+          res.send({record: foundRecord, recordOrder, isDuplicate: false})
+        }
       }
     }
 
     //if guest
     if (!req.user) {
+      let isDuplicate = false
       if (!req.session.cart) {
         req.session.cart = {Records: []}
       }
+      //is this record a duplicate
+      const guestDuplicate = req.session.cart.Records.filter(
+        record => record.id === foundRecord.id
+      )
+      if (guestDuplicate.length !== 0) {
+        isDuplicate = true
+      }
       req.session.cart.Records.push(foundRecord)
-      res.send(req.session.cart)
+      res.send({record: foundRecord, isDuplicate})
     }
   } catch (error) {
     console.log(error)

@@ -27,6 +27,14 @@ class AllProducts extends React.Component {
           Not sure what to buy? Here's what our editors like!
         </h3>
         <Featured />
+        <a href="#" id="goToTop">
+          <img
+            alt="Top of page"
+            src="/images/top-arrow.png"
+            height="15%"
+            id="goToTop"
+          />
+        </a>
       </div>
     )
   }
