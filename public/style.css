@@ -128,3 +128,10 @@ hr {
 #recommendations {
   text-align: center;
 }
+
+#goToTop {
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+  background-color: transparent;
+}
