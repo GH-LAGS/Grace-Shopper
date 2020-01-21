@@ -2,6 +2,17 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
+import {
+  Grommet,
+  Box,
+  Grid,
+  Text,
+  Button,
+  FormField,
+  TextInput,
+  Form,
+  Anchor
+} from 'grommet'
 
 /**
  * COMPONENT
@@ -10,37 +21,52 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
+    <Box
+      direction="column"
+      justify="start"
+      align="center"
+      alignContent="start"
+      pad="large"
+      gap="xsmall"
+      round="small"
+      margin="medium"
+      basis="medium"
+    >
+      <Form onSubmit={handleSubmit} name={name}>
+        <Box direction="column" align="center">
+          <FormField htmlFor="email" label="Email" background="#FFFFFF">
+            <TextInput name="email" type="text" background="#FFFFFF" />
+          </FormField>
+          <FormField htmlFor="password" label="Password">
+            <TextInput name="password" type="password" />
+          </FormField>
+          {/* <div>
           <label htmlFor="email">
             <small>Email</small>
           </label>
           <input name="email" type="text" />
-        </div>
-        <div>
+        </div> */}
+          {/* <div>
           <label htmlFor="password">
             <small>Password</small>
           </label>
           <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <a href="/auth/google">{displayName} with Google</a>
-    </div>
+        </div> */}
+          {/* <div> */}
+          <Button type="submit" label={displayName} />
+          {/* </div> */}
+          {error && error.response && <div> {error.response.data} </div>}
+        </Box>
+      </Form>
+      <Anchor
+        href="/auth/google"
+        primary
+        label={`${displayName} with Google`}
+      />
+    </Box>
   )
 }
 
-/**
- * CONTAINER
- *   Note that we have two different sets of 'mapStateToProps' functions -
- *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
- *   function, and share the same Component. This is a good example of how we
- *   can stay DRY with interfaces that are very similar to each other!
- */
 const mapLogin = state => {
   return {
     name: 'login',
@@ -72,9 +98,6 @@ const mapDispatch = dispatch => {
 export const Login = connect(mapLogin, mapDispatch)(AuthForm)
 export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
 
-/**
- * PROP TYPES
- */
 AuthForm.propTypes = {
   name: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired,

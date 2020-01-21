@@ -30,7 +30,6 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   const strategy = new GoogleStrategy(
     googleConfig,
     (token, refreshToken, profile, done) => {
-      console.log('GOOGLE PROFILE', profile)
       const googleId = profile.id
       const email = profile.emails[0].value
       const imgUrl = profile.photos[0].value
@@ -44,13 +43,11 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
           googleId: null
         }
       }).then(existingUser => {
-        console.log('USER AFTER FOUND ONE', existingUser)
         if (existingUser) {
           return done(null, false, {
             message: 'User with this email already exists'
           })
         } else {
-          console.log('IN ELSE STATEMENT')
           User.findOrCreate({
             where: {googleId},
             defaults: {email}
