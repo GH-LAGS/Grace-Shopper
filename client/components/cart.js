@@ -4,37 +4,67 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchCart} from '../store/cart'
+import {Order} from './ordered-record'
 
 class Cart extends React.Component {
   componentDidMount() {
     this.props.getCart()
   }
 
-  render() {
-    return (
-      <div>
-        <h1>Shopping Cart</h1>
-        {this.props.cart === undefined ? (
-          <h4>'waiting for cart'</h4>
-        ) : (
-          // this.props.cart.cart.length === 0 ?
-          //   (<p>Your shopping cart is empty.</p>)
-          // :
+  // render() {
+  //   let total = 0
+  //   return (
+  //     <div className="cart">
+  //       <h1>Cart</h1>
+  //         <div className="singleRecord">
+  //           {this.props.cart === undefined ? (
+  //             <h4>'waiting for cart'</h4>
+  //           ) : (
+  //             this.props.cart.map(record => {
+  //               total += (record.RecordOrder.soldPrice / 100)
+  //               return (
+  //                 <div>
+  //                   <Order key={record.id}
+  //                     record={record}
+  //                     className="OrderHistory"
+  //                   />
+  //                 </div>
+  //               )})
+  //               <h3 id="totalPrice">Total Price: ${total}</h3>
+  //               <button type="button" id="checkout">Checkout</button>
+  //               <Link to="/preview">Order Preview Page</Link>
 
-          this.props.cart.map(record => {
-            console.log(record)
-            return (
-              <h4 key={record.id}>
-                {record.RecordOrder.quantity} {record.title}
-              </h4>
-            )
-          })
-        )}
-        <button type="button" id="checkout">
-          Checkout
-        </button>
-        <p>This button, once implemented will link to order preview page.</p>
-        <Link to="/preview">Order Preview Page</Link>
+  render() {
+    let total = 0
+    return (
+      <div className="allPastOrders">
+        <h1>Cart: </h1>
+        <hr />
+        <div className="singlePastOrder">
+          {this.props.cart === undefined ? (
+            <h3>Nothing in your cart yet!</h3>
+          ) : (
+            this.props.cart.map(record => {
+              total += record.RecordOrder.soldPrice / 100
+              return (
+                <div key={record.id} record={record}>
+                  <Order
+                    key={record.id}
+                    record={record}
+                    className="OrderHistory"
+                  />
+                  <hr />
+                </div>
+              )
+            })
+          )}
+          <h3 id="totalPrice">Total Price: {`$${total}`}</h3>
+          <button type="button" id="checkout">
+            Checkout
+          </button>
+          <br />
+          <Link to="/preview">Order Preview Page</Link>
+        </div>
       </div>
     )
   }
@@ -56,9 +86,3 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart)
-
-// TO DO
-// Add prop types
-// Navbar.propTypes = {
-//   handleClick: PropTypes.func.isRequired,
-// }

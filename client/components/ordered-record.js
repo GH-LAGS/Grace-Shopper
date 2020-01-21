@@ -35,7 +35,7 @@ export const Order = props => {
         {props.record.artist}
       </Text>
       <Text direction="row-responsive" justify="center">
-        {props.record.RecordOrder.quantity}
+        Qty: {props.record.RecordOrder.quantity}
       </Text>
       <Text direction="row-responsive" justify="center">
         Price: {`$${props.record.RecordOrder.soldPrice / 100}`}
