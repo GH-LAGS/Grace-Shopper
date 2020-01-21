@@ -70,6 +70,7 @@ router.post('/:id', async (req, res, next) => {
       } else {
         console.log('in duplicate else statement')
         //check cart for if recordOrder matching record id already exists
+        //BUG FOR TOMORROW, not recognizing duplicates
         const duplicate = await RecordOrder.findOne({
           where: {
             orderId: foundCart.id,
@@ -81,7 +82,7 @@ router.post('/:id', async (req, res, next) => {
           await duplicate.update({
             quantity: duplicate.quantity + 1 //check this later
           })
-          res.send({record: foundRecord, recordOrder, isDuplicate: true})
+          res.send({record: foundRecord, recordOrder})
         } else {
           //create new row in RecordOrder and assign foreign
           recordOrder = await RecordOrder.create({
@@ -90,7 +91,7 @@ router.post('/:id', async (req, res, next) => {
             recordId: foundRecord.id,
             orderId: foundCart.id
           })
-          res.send({record: foundRecord, recordOrder, isDuplicate: false})
+          res.send({record: foundRecord, recordOrder})
         }
       }
     }

@@ -3,19 +3,16 @@ import Axios from 'axios'
 // ACTION TYPES
 const GOT_CART = 'GOT_CART'
 const ADD_TO_CART = 'ADD_TO_CART'
-const UPDATE_QUANTITY = 'UPDATE_QUANTITY'
 
 // INITIAL STATE
 const defaultCart = []
 
 // ACTION CREATORS
 const gotCart = cart => ({type: GOT_CART, cart})
-const addedToCart = (record, quantity) => ({
+const addedToCart = record => ({
   type: ADD_TO_CART,
-  record,
-  quantity
+  record
 })
-const updateQuantity = record => ({type: UPDATE_QUANTITY, record})
 
 //THUNK
 export const fetchCart = () => async dispatch => {
@@ -30,12 +27,9 @@ export const fetchCart = () => async dispatch => {
 export const addToCart = id => async dispatch => {
   try {
     const res = await Axios.post(`/api/cart/${id}`)
-    //check for duplicate
-    if (res.data.isDuplicate) {
-      dispatch(updateQuantity(res.data.record))
-    } else {
-      dispatch(addedToCart(res.data.record))
-    }
+    dispatch(
+      addedToCart({...res.data.record, recordOrder: {...res.data.recordOrder}})
+    )
   } catch (error) {
     console.log(error)
   }
@@ -47,12 +41,7 @@ export default function(state = defaultCart, action) {
     case GOT_CART:
       return [...action.cart]
     case ADD_TO_CART:
-      action.record.cartQuantity = 1
       return [...state, action.record]
-    case UPDATE_QUANTITY:
-      const record = state.filter(record => record.id === action.record.id)[0]
-      record.cartQuantity++
-      return [...state]
     default:
       return state
   }
