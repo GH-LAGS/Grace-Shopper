@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-// import {addToCart} from '../store/record'
+import PropTypes from 'prop-types'
+import {addToCart} from '../store/cart'
 import {Grommet, Box, Grid, Text, Button} from 'grommet'
 
 const Record = props => {
@@ -26,7 +27,11 @@ const Record = props => {
       </Text>
       <Text direction="row-responsive" justify="center">{`$${props.record
         .price / 100}`}</Text>
-      <Button direction="row-responsive" justify="center">
+      <Button
+        onClick={() => props.addToCart(props.record.id)}
+        direction="row-responsive"
+        justify="center"
+      >
         Add To Cart
       </Button>
     </Box>
@@ -35,8 +40,12 @@ const Record = props => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    // addToCart: recordId => dispatch(addToCart(recordId))
+    addToCart: recordId => dispatch(addToCart(recordId))
   }
 }
 
 export default connect(null, mapDispatchToProps)(Record)
+
+Record.propTypes = {
+  addToCart: PropTypes.func.isRequired
+}
