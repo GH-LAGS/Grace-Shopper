@@ -37,12 +37,32 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
       const lastName = profile.name.familyName
       const fullName = profile.displayName
 
-      User.findOrCreate({
-        where: {googleId},
-        defaults: {email, imgUrl, firstName, lastName, fullName}
+      User.findOne({
+        where: {
+          email: email,
+          googleId: null
+        }
+      }).then(existingUser => {
+        if (existingUser) {
+          return done(null, false, {
+            message: 'User with this email already exists'
+          })
+        } else {
+          User.findOrCreate({
+            where: {googleId},
+            defaults: {email}
+          })
+            .then(([user]) => done(null, user))
+            .catch(done)
+        }
       })
-        .then(([user]) => done(null, user))
-        .catch(done)
+
+      //     User.findOrCreate({
+      //       where: {googleId},
+      //       defaults: {email}
+      //     })
+      //       .then(([user]) => done(null, user))
+      //       .catch(done)
     }
   )
 

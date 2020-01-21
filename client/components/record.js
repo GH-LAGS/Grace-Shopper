@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import {addToCart} from '../store/cart'
 import {Grommet, Box, Grid, Text, Button} from 'grommet'
 
-const Record = props => {
+export const Record = props => {
   return (
     <Box
       direction="column"
@@ -18,8 +18,7 @@ const Record = props => {
       basis="medium"
     >
       <input type="image" src={props.record.imgURL} className="albumCover" />
-      {/* feature-style-react-record */}
-      <Text direction="row-responsive" justify="center" weight="">
+      <Text direction="row-responsive" justify="center" weight="bold">
         {props.record.title}
       </Text>
       <Text direction="row-responsive" justify="center">

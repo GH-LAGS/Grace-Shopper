@@ -1,7 +1,5 @@
 import Axios from 'axios'
 
-//placeholder for reducer and thunk and action creator and action dispatcher
-
 // ACTION TYPES
 const GET_CART = 'GET_CART'
 const ADD_TO_CART = 'ADD_TO_CART'
@@ -36,7 +34,7 @@ export const addToCart = id => async dispatch => {
 export default function(state = defaultCart, action) {
   let copyCart = state.cart
   switch (action.type) {
-    case GET_CART:
+    case GOT_CART:
       return {...state, cart: action.cart}
     case ADD_TO_CART:
       copyCart.push(action.record)

@@ -1,16 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import OrderHistory from './order-history'
 
 /**
  * COMPONENT
  */
-const UserHome = props => {
+export const UserProfile = props => {
   const {email} = props
 
   return (
     <div>
       <h3>Welcome, {email}</h3>
+      <OrderHistory />
     </div>
   )
 }
@@ -24,11 +26,11 @@ const mapState = state => {
   }
 }
 
-export default connect(mapState)(UserHome)
+export default connect(mapState)(UserProfile)
 
 /**
  * PROP TYPES
  */
-UserHome.propTypes = {
+UserProfile.propTypes = {
   email: PropTypes.string
 }
