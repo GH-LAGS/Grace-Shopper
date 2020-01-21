@@ -17,12 +17,14 @@ before_script:
 script:
   - npm test # test the code
   - npm run build-client # make the bundle
-
-# before_deploy:
-#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
-# deploy:
-#   skip_cleanup: true # prevents travis from deleting the build
-#   provider: heroku
-#   app: YOUR-HEROKU-APP-NAME-HERE # see README
-#   api_key:
-#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+before_deploy: # omit node_modules, since we set skip_cleanup below
+  - rm -rf node_modules
+deploy: # see README for details on these keys
+  # prevents travis from deleting the build
+  skip_cleanup: true
+  provider: heroku
+  # app should be your heroku app name; see README
+  app: grace-shopper-lags
+  # the secure key indicates an encrypted value; see README
+  api_key:
+    secure: c5Xa3gBBI8HkxQdHGuFEYeeJVRfYJWUjXdEZc+sMiE3+xYbH4dRw15nIU0FUzs9NVOud8e0Eh7kdVfW5ht2j4K7Iaa6asJS+M40XU8x1uR7iT/Pb9F7o0Mhlr3MIT6qYdREbA51baBqdTrZNTQISfRNm0r+cMpHeWrPoCG0tBuW+bNYP9agKWesqKQSs0MYZ0LECeHqGFNRoDPMafmntGb+aHO7j9ktmCXTdz0qLe7vCi30M2W0LXOCUKDV2m48rMe7uO4nXBifGO8qhmg13j/98d4ST8eECwckwxizrGftC+UmHIYSy1av+CTo/apwF/70oXS73RsBuBjWOVE1ab8vWqj27NI99QxLp4RPg/ozI7K+oLI1kTTlCVKCkYTCKDW6IgCWMUQ3DBHUIwbkt+hTWbVEuq+K3NsceHpfHnlcyE5pOxWfBbciEaMtOQ0X7Pmx28xYTGb8sbUxs5IRxynybivWTH1XyxQFUTrgYcAoL4PCA4aufYZ9rXY5aQa6hx41XlnbsggyC+LuEwp1kQVFsgxtp/WrFvuVBt/9UC6C0JlEsXDawgIaPWSYE2emJhuPqZsZPcOCuZmh9mmf+ALCgcXK1ThOyqAVCKMunLAdowHynW4aMzSfa0kKrthOB7GvIcbhIg43cIffx01QNYTueGALBwQuHIkRiDWO3Ilw=
