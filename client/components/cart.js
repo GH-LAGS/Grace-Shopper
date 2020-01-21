@@ -6,6 +6,10 @@ import {connect} from 'react-redux'
 import {fetchCart} from '../store/cart'
 
 class Cart extends React.Component {
+  constructor() {
+    super(props)
+    this.state = {checkout: false}
+  }
   componentDidMount() {
     this.props.getCart()
   }

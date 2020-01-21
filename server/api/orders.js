@@ -26,8 +26,27 @@ router.post('/', async (req, res, next) => {
     let order
     // User -> change order to complete
     if (req.user) {
+      // calculate total price, add date, address
+      // find order first
+      order = await Order.findOne({
+        where: {
+          userId: req.user.id,
+          status: 'pending'
+        },
+        include: {model: RecordOrder}
+      })
+      console.log('ORDER', order)
+      // const recordOrders = await RecordOrder.findAll({
+      //   where:{
+      //     orderId
+      //   }
+      // })
       order = await Order.update(
-        {status: 'completed'},
+        {
+          date: newDate(),
+          address: 'GET FROM REQ', //add address
+          status: 'completed'
+        },
         {
           where: {
             userId: req.user.id,
@@ -37,23 +56,36 @@ router.post('/', async (req, res, next) => {
       )
     } else {
       // Guest -> create complete order
-      // move lower to calc total price (need to for both guest & user)
+      const guestCart = req.session.cart.Records
+      let totalPrice = 0
       order = await Order.create({
-        date: req.date,
-        totalPrice: 0,
-        address: req.address,
+        date: new Date(),
+        address: 'req.address',
         status: 'complete'
       })
-      // need to check if RecordOrder exists and quantity++
-      // reduce quantity of Records
-      cart.Records.forEach(record => {
-        RecordOrder.create({
-          orderId: order.id,
-          recordId: record.id,
-          quantity: 1,
-          soldPrice: record.price
-        })
+      // Create RecordOrders or update existing
+      const createdRecordOrders = []
+      guestCart.Records.forEach(async record => {
+        //update totalPrice and quantity
+        totalPrice += record.price
+        record.decrement({quantity})
+        const createdRecordOrder = createdRecordOrders.filter(
+          recordOrder => recordOrder.title === record.title
+        )
+        if (createdRecordOrder) {
+          await createdRecordOrder.increment(quantity)
+        } else {
+          const newRecordOrder = await RecordOrder.create({
+            orderId: order.id,
+            recordId: record.id,
+            quantity: 1,
+            soldPrice: record.price
+          })
+          createdRecordOrders.push({[record.title]: newRecordOrder})
+        }
       })
+      order.totalPrice = totalPrice
+      order.save()
       req.session.cart = {Records: []}
     }
     res.status(200).send()

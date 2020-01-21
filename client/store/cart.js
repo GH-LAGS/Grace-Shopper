@@ -4,6 +4,7 @@ import Axios from 'axios'
 const GOT_CART = 'GOT_CART'
 const ADD_TO_CART = 'ADD_TO_CART'
 const UPDATE_QUANTITY = 'UPDATE_QUANTITY'
+const CHECKOUT = 'CHECKOUT'
 
 // INITIAL STATE
 const defaultCart = []
@@ -12,6 +13,7 @@ const defaultCart = []
 const gotCart = cart => ({type: GOT_CART, cart})
 const addedToCart = record => ({type: ADD_TO_CART, record})
 const updateQuantity = record => ({type: UPDATE_QUANTITY, record})
+const checkout = () => ({type: CHECKOUT})
 
 //THUNK
 export const fetchCart = () => async dispatch => {
@@ -37,6 +39,15 @@ export const addToCart = id => async dispatch => {
   }
 }
 
+export const completeOrder = () => async dispatch => {
+  try {
+    await Axios.post('/api/order/')
+    dispatch(checkout())
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 //REDUCER
 export default function(state = defaultCart, action) {
   switch (action.type) {
@@ -49,6 +60,8 @@ export default function(state = defaultCart, action) {
       const record = state.filter(record => record.id === action.record.id)[0]
       record.cartQuantity++
       return [...state]
+    case CHECKOUT:
+      return []
     default:
       return state
   }
