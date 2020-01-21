@@ -6,22 +6,28 @@ const Featured = props => {
     <Box height="medium" width="xlarge" overflow="hidden">
       <Carousel fill>
         <Image
-          fit="cover"
-          src="/public/images/fleetwood-mac.jpg"
-          height="200px"
-          width="200px"
+          fit="contain"
+          src="/images/fleetwood-mac.jpg"
+          alignSelf="center"
+          height="50%"
+          width="50%"
+          margin="2%"
         />
         <Image
-          fit="cover"
-          src="/public/images/smiths.jpg"
-          height="200px"
-          width="200px"
+          fit="contain"
+          src="/images/smiths.jpg"
+          alignSelf="center"
+          height="50%"
+          width="50%"
+          margin="2%"
         />
         <Image
-          fit="cover"
-          src="/public/images/bowie.jpg"
-          height="200px"
-          width="200px"
+          fit="contain"
+          src="/images/bowie.jpg"
+          alignSelf="center"
+          height="50%"
+          width="50%"
+          margin="2%"
         />
       </Carousel>
     </Box>
