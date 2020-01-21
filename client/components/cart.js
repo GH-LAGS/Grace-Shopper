@@ -42,6 +42,7 @@ class Cart extends React.Component {
           <br />
           <Link to="/preview">Order Preview Page</Link>
         </div>
+
       </div>
     )
   }
