@@ -4,35 +4,12 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchCart} from '../store/cart'
-import {Order} from './ordered-record'
+import {Order} from './single-cart'
 
 class Cart extends React.Component {
   componentDidMount() {
     this.props.getCart()
   }
-
-  // render() {
-  //   let total = 0
-  //   return (
-  //     <div className="cart">
-  //       <h1>Cart</h1>
-  //         <div className="singleRecord">
-  //           {this.props.cart === undefined ? (
-  //             <h4>'waiting for cart'</h4>
-  //           ) : (
-  //             this.props.cart.map(record => {
-  //               total += (record.RecordOrder.soldPrice / 100)
-  //               return (
-  //                 <div>
-  //                   <Order key={record.id}
-  //                     record={record}
-  //                     className="OrderHistory"
-  //                   />
-  //                 </div>
-  //               )})
-  //               <h3 id="totalPrice">Total Price: ${total}</h3>
-  //               <button type="button" id="checkout">Checkout</button>
-  //               <Link to="/preview">Order Preview Page</Link>
 
   render() {
     let total = 0
