@@ -15,14 +15,14 @@ class Cart extends React.Component {
       <div>
         {console.log('in component', this.props)}
         <h1>Shopping Cart</h1>
-        {this.props.cart.cart === undefined ? (
+        {this.props.cart === undefined ? (
           <h4>'waiting for cart'</h4>
         ) : (
           // this.props.cart.cart.length === 0 ?
           //   (<p>Your shopping cart is empty.</p>)
           // :
 
-          this.props.cart.cart.map(record => {
+          this.props.cart.map(record => {
             return <h4 key={record.id}>{record.title}</h4>
           })
         )}
