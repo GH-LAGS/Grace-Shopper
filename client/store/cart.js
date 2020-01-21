@@ -1,14 +1,14 @@
 import Axios from 'axios'
 
 // ACTION TYPES
-const GET_CART = 'GET_CART'
+const GOT_CART = 'GOT_CART'
 const ADD_TO_CART = 'ADD_TO_CART'
 
 // INITIAL STATE
 const defaultCart = []
 
 // ACTION CREATORS
-const gotCart = cart => ({type: GET_CART, cart})
+const gotCart = cart => ({type: GOT_CART, cart})
 const addedToCart = record => ({type: ADD_TO_CART, record})
 
 //THUNK
