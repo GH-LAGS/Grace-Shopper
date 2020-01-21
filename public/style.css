@@ -1,28 +1,11 @@
 body {
   font-family: sans-serif;
   background-color: #fcf1b3;
+  margin: 0px;
 }
 
 a {
   text-decoration: none;
-}
-
-label {
-  display: block;
-}
-
-#navbar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-#left-nav {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
 }
 
 nav {
@@ -30,10 +13,30 @@ nav {
   flex-direction: row;
   justify-content: center;
 }
-
 nav a {
   display: inline-block;
   margin: 1em;
+  font-size: 20px;
+}
+#name {
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+#name:hover {
+  text-decoration: none;
+}
+
+.navLink:visited {
+  color: white;
+}
+
+.navLink:hover {
+  text-decoration: underline;
+}
+
+label {
+  display: block;
 }
 
 form div {

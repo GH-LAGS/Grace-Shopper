@@ -15,7 +15,6 @@ const gotAllRecords = records => ({
 // THUNK CREATORS
 export const fetchRecords = () => async dispatch => {
   try {
-    console.log('FETCHING IN THUNK')
     const res = await axios.get('/api/records')
     dispatch(gotAllRecords(res.data))
   } catch (error) {
