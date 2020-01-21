@@ -1,8 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchOrders} from '../store/orders'
-// import Order from './ordered-record'
-import {Grommet, Box, Text, Image} from 'grommet'
+import {Order} from './ordered-record'
 
 export class OrderHistory extends React.Component {
   componentDidMount() {
@@ -24,49 +23,11 @@ export class OrderHistory extends React.Component {
                   <h3 id="datePurchased">Purchased on {order.date}</h3>
                   {order.Records.map(record => {
                     return (
-                      <div key={record.id} className="OrderHistory">
-                        <Box
-                          direction="row"
-                          justify="between"
-                          align="center"
-                          pad="small"
-                          gap="xsmall"
-                          round="small"
-                          margin="medium"
-                          basis="medium"
-                        >
-                          <Box
-                            pad="medium"
-                            background="#5B4037"
-                            gap="xsmall"
-                            round="small"
-                            margin="medium"
-                          >
-                            <Image
-                              src={record.imgURL}
-                              alt={record.title}
-                              height="200px"
-                              width="200px"
-                            />
-                          </Box>
-                          <Text
-                            direction="row-responsive"
-                            justify="center"
-                            weight="bold"
-                          >
-                            {record.title}
-                          </Text>
-                          <Text direction="row-responsive" justify="center">
-                            {record.artist}
-                          </Text>
-                          <Text direction="row-responsive" justify="center">
-                            {record.RecordOrder.quantity}
-                          </Text>
-                          <Text direction="row-responsive" justify="center">
-                            Price: {`$${record.RecordOrder.soldPrice / 100}`}
-                          </Text>
-                        </Box>
-                      </div>
+                      <Order
+                        key={record.id}
+                        record={record}
+                        className="OrderHistory"
+                      />
                     )
                   })}
                   <h3 id="totalPrice">
