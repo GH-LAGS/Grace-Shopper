@@ -18,6 +18,7 @@ router.get('/', async (req, res, next) => {
           status: 'pending'
         },
         include: [{model: Record}]
+        //include: quantity from record order
       })
       if (cart) {
         res.json(cart)
