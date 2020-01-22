@@ -7,7 +7,7 @@ import {fetchCart} from '../store/cart'
 import {Order} from './single-cart'
 
 class Cart extends React.Component {
-  constructor() {
+  constructor(props) {
     super(props)
     this.state = {checkout: false}
   }
@@ -46,7 +46,6 @@ class Cart extends React.Component {
           <br />
           <Link to="/preview">Order Preview Page</Link>
         </div>
-
       </div>
     )
   }
