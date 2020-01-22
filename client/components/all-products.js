@@ -2,9 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import Record from './record'
 import Featured from './featured-items'
-import axios from 'axios'
 import {fetchRecords} from '../store/record'
-import {Grommet, Box, Grid, Text, Button} from 'grommet'
 
 export class UnconnectAllProducts extends React.Component {
   componentDidMount() {
@@ -15,7 +13,7 @@ export class UnconnectAllProducts extends React.Component {
     return (
       <div className="container">
         {this.props.records.length === 0 ? (
-          <h2>no records to show yet</h2>
+          <h3>no records to show yet</h3>
         ) : (
           this.props.records.map(record => {
             return <Record key={record.id} record={record} />
