@@ -5,11 +5,12 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
-const Navbar = ({handleClick, isLoggedIn, cart}) => (
+
+export const UnconnectNavbar = ({handleClick, isLoggedIn, cart}) => (
   <Header background="#EC6101" pad="medium">
     <Box direction="row" align="center" gap="small">
       <Link to="/allproducts" className="navLink" id="name">
-        <h1>LAGS RECORDS</h1>
+        <img alt="LAGS logo" src="/logo.png" />
       </Link>
     </Box>
 
@@ -64,10 +65,10 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(Navbar)
+export default connect(mapState, mapDispatch)(UnconnectNavbar)
 
-// PROP TYPES
-Navbar.propTypes = {
-  handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
-}
+// // PROP TYPES
+// UnconnectNavbar.propTypes = {
+//   handleClick: PropTypes.func.isRequired,
+//   isLoggedIn: PropTypes.bool.isRequired
+// }

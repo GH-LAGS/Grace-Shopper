@@ -15,7 +15,7 @@ const Featured = props => {
         />
         <Image
           fit="contain"
-          src="/images/smiths.jpg"
+          src="/images/springsteen.jpg"
           alignSelf="center"
           height="50%"
           width="50%"

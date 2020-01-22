@@ -65,3 +65,9 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart)
+
+// TO DO
+// Add prop types
+// Navbar.propTypes = {
+//   handleClick: PropTypes.func.isRequired,
+// }
