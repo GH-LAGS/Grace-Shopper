@@ -3,8 +3,8 @@ import React from 'react'
 // import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {fetchCart} from '../store/cart'
-import {Order} from './single-cart'
+import {fetchCart, addToCart, removeFromCart} from '../store/cart'
+import {CartItem} from './cart-item'
 
 class Cart extends React.Component {
   componentDidMount() {
@@ -22,12 +22,14 @@ class Cart extends React.Component {
             <h3>Nothing in your cart yet!</h3>
           ) : (
             this.props.cart.map(record => {
-              total += record.RecordOrder.soldPrice / 100
+              total += record.price / 100
               return (
                 <div key={record.id} record={record}>
-                  <Order
+                  <CartItem
                     key={record.id}
                     record={record}
+                    addToCart={this.props.addToCart}
+                    removeFromCart={this.props.removeFromCart}
                     className="OrderHistory"
                   />
                   <hr />
@@ -42,7 +44,6 @@ class Cart extends React.Component {
           <br />
           <Link to="/preview">Order Preview Page</Link>
         </div>
-
       </div>
     )
   }
@@ -57,9 +58,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getCart: () => {
-      dispatch(fetchCart())
-    }
+    getCart: () => dispatch(fetchCart()),
+    addToCart: recordId => dispatch(addToCart(recordId)),
+    removeFromCart: recordId => dispatch(removeFromCart(recordId))
   }
 }
 
