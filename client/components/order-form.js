@@ -1,12 +1,14 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {Form, Button, FormField, TextInput} from 'grommet'
 
 class OrderForm extends React.Component {
   render() {
     return (
       <div>
-        <h1>Preview your order:</h1>
+        <h3>Place your order:</h3>
+
         <div>
           <button type="submit" id="submit-order">
             Place Your Order
