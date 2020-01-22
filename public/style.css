@@ -32,6 +32,9 @@ nav a {
 .navLink:visited {
   color: white;
 }
+.navLink {
+  color: white;
+}
 
 .navLink:hover {
   text-decoration: underline;

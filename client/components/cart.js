@@ -22,7 +22,7 @@ class Cart extends React.Component {
             <h3>Nothing in your cart yet!</h3>
           ) : (
             this.props.cart.map(record => {
-              total += record.price / 100
+              total += record.price * record.RecordOrder.quantity / 100
               return (
                 <div key={record.id} record={record}>
                   <CartItem

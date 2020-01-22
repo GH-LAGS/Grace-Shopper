@@ -5,8 +5,9 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
+
 export const UnconnectNavbar = ({handleClick, isLoggedIn, cart}) => (
-  <Header background="#D85434" pad="medium">
+  <Header background="#EC6101" pad="medium">
     <Box direction="row" align="center" gap="small">
       <Link to="/allproducts" className="navLink" id="name">
         <img alt="LAGS logo" src="/logo.png" />
