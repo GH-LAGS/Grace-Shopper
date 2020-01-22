@@ -3,7 +3,8 @@ import React from 'react'
 // import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {fetchCart} from '../store/cart'
+import {fetchCart, addToCart, removeFromCart} from '../store/cart'
+import {CartItem} from './cart-item'
 
 class Cart extends React.Component {
   componentDidMount() {
@@ -12,30 +13,36 @@ class Cart extends React.Component {
 
   render() {
     return (
-      <div>
-        {console.log('in component', this.props.cart[0].cartQuantity)}
-        <h1>Shopping Cart</h1>
-        {this.props.cart === undefined ? (
-          <h4>'waiting for cart'</h4>
-        ) : (
-          // this.props.cart.cart.length === 0 ?
-          //   (<p>Your shopping cart is empty.</p>)
-          // :
-
-          this.props.cart.map(record => {
-            console.log(record)
-            return (
-              <h4 key={record.id}>
-                {record.title} {record.cartQuantity}
-              </h4>
-            )
-          })
-        )}
-        <button type="button" id="checkout">
-          Checkout
-        </button>
-        <p>This button, once implemented will link to order preview page.</p>
-        <Link to="/preview">Order Preview Page</Link>
+      <div className="allPastOrders">
+        <h1>Cart: </h1>
+        <hr />
+        <div className="singlePastOrder">
+          {this.props.cart === undefined ? (
+            <h3>Nothing in your cart yet!</h3>
+          ) : (
+            this.props.cart.map(record => {
+              total += record.price / 100
+              return (
+                <div key={record.id} record={record}>
+                  <CartItem
+                    key={record.id}
+                    record={record}
+                    addToCart={this.props.addToCart}
+                    removeFromCart={this.props.removeFromCart}
+                    className="OrderHistory"
+                  />
+                  <hr />
+                </div>
+              )
+            })
+          )}
+          <h3 id="totalPrice">Total Price: {`$${total}`}</h3>
+          <button type="button" id="checkout">
+            Checkout
+          </button>
+          <br />
+          <Link to="/preview">Order Preview Page</Link>
+        </div>
       </div>
     )
   }
@@ -50,9 +57,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getCart: () => {
-      dispatch(fetchCart())
-    }
+    getCart: () => dispatch(fetchCart()),
+    addToCart: recordId => dispatch(addToCart(recordId)),
+    removeFromCart: recordId => dispatch(removeFromCart(recordId))
   }
 }
 

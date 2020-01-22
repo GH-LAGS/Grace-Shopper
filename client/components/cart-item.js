@@ -4,7 +4,7 @@ import {addToCart} from '../store/cart'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 
-export const Order = props => {
+export const CartItem = props => {
   return (
     <Box
       direction="row"
@@ -37,7 +37,11 @@ export const Order = props => {
       <Text direction="row-responsive" justify="center">
         {props.record.artist}
       </Text>
-      <Button direction="row-responsive" justify="center">
+      <Button
+        onClick={() => props.removeFromCart(props.record.id)}
+        direction="row-responsive"
+        justify="center"
+      >
         -
       </Button>
       <Text direction="row-responsive" justify="center">
@@ -51,24 +55,15 @@ export const Order = props => {
         +
       </Button>
       <Text direction="row-responsive" justify="center">
-        Price: {`$${props.record.RecordOrder.soldPrice / 100}`}
+        Price: {`$${props.record.price / 100}`}
       </Text>
     </Box>
   )
 }
 
-const mapStateToProps = state => {
-  return {state: state.cart}
-}
+export default CartItem
 
-const mapDispatchToProps = dispatch => {
-  return {
-    addToCart: recordId => dispatch(addToCart(recordId))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Order)
-
-Order.propTypes = {
-  addToCart: PropTypes.func.isRequired
+CartItem.propTypes = {
+  addToCart: PropTypes.func.isRequired,
+  removeFromCart: PropTypes.func.isRequired
 }
