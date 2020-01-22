@@ -26,7 +26,7 @@ const AuthForm = props => {
       justify="start"
       align="center"
       alignContent="start"
-      pad="large"
+      pad="xsmall"
       gap="xsmall"
       round="small"
       margin="medium"
@@ -40,21 +40,7 @@ const AuthForm = props => {
           <FormField htmlFor="password" label="Password">
             <TextInput name="password" type="password" />
           </FormField>
-          {/* <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
-        </div> */}
-          {/* <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div> */}
-          {/* <div> */}
           <Button type="submit" label={displayName} />
-          {/* </div> */}
           {error && error.response && <div> {error.response.data} </div>}
         </Box>
       </Form>

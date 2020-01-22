@@ -5,14 +5,23 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchCart, addToCart, removeFromCart} from '../store/cart'
 import {CartItem} from './cart-item'
+import OrderForm from './order-form'
+import {Button} from 'grommet'
 
 class Cart extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {checkout: false}
+    this.state = {
+      checkout: false
+    }
+    this.handleSubmitClick = this.handleSubmitClick.bind(this)
   }
   componentDidMount() {
     this.props.getCart()
+  }
+
+  handleSubmitClick() {
+    this.setState({checkout: true})
   }
 
   render() {
@@ -42,11 +51,20 @@ class Cart extends React.Component {
             })
           )}
           <h3 id="totalPrice">Total Price: {`$${total}`}</h3>
-          <button type="button" id="checkout">
-            Checkout
-          </button>
-          <br />
-          <Link to="/preview">Order Preview Page</Link>
+          <Button
+            type="button"
+            id="checkout"
+            label="Checkout"
+            color="#5FA782"
+            onClick={this.handleSubmitClick}
+          />
+        </div>
+        <div>
+          {this.props.cart.length ? (
+            this.state.checkout && <OrderForm />
+          ) : (
+            <div> </div>
+          )}
         </div>
       </div>
     )
