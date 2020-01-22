@@ -5,10 +5,19 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   if (!req.user) {
     if (req.session.cart) {
-      res.send(req.session.cart)
+      let cartRecords = req.session.cartRecords
+      let records = []
+      for (const cartRecord of cartRecords) {
+        const record = await Record.findByPk(cartRecord.recordId)
+        records.push({
+          ...record,
+          RecordOrder: cartRecord
+        })
+      }
+      res.send({Records: records})
     } else {
-      req.session.cart = {Records: []}
-      res.send(req.session.cart)
+      req.session.cart = {cartRecords: []}
+      res.send({Records: []})
     }
   } else {
     try {
@@ -39,7 +48,7 @@ router.post('/:id', async (req, res, next) => {
       id: id
     }
   })
-
+  console.log('FoundRecord:', foundRecord)
   try {
     let recordOrder
     //if logged in
@@ -67,6 +76,12 @@ router.post('/:id', async (req, res, next) => {
           recordId: foundRecord.id,
           orderId: newCart.id
         })
+        res.send({
+          Record: {
+            ...foundRecord,
+            RecordOrder: recordOrder
+          }
+        })
       } else {
         console.log('in duplicate else statement')
         //check cart for if recordOrder matching record id already exists
@@ -82,7 +97,12 @@ router.post('/:id', async (req, res, next) => {
           await duplicate.update({
             quantity: duplicate.quantity + 1 //check this later
           })
-          res.send({record: foundRecord, recordOrder})
+          res.send({
+            Record: {
+              ...foundRecord,
+              RecordOrder: recordOrder
+            }
+          })
         } else {
           //create new row in RecordOrder and assign foreign
           recordOrder = await RecordOrder.create({
@@ -91,26 +111,36 @@ router.post('/:id', async (req, res, next) => {
             recordId: foundRecord.id,
             orderId: foundCart.id
           })
-          res.send({record: foundRecord, recordOrder})
+          res.send({
+            Record: {
+              ...foundRecord,
+              RecordOrder: recordOrder
+            }
+          })
         }
       }
     }
 
     //if guest
     if (!req.user) {
-      let isDuplicate = false
       if (!req.session.cart) {
-        req.session.cart = {Records: []}
+        req.session.cart = {cartRecords: []}
       }
       //is this record a duplicate
-      const guestDuplicate = req.session.cart.Records.filter(
-        record => record.id === foundRecord.id
+      let existingCartRecord = req.session.cart.cartRecords.find(
+        cartRecord => cartRecord.recordId === foundRecord.id
       )
-      if (guestDuplicate.length !== 0) {
-        isDuplicate = true
+      if (existingCartRecord) {
+        existingCartRecord.quantity++
+      } else {
+        existingCartRecord = {
+          recordId: foundRecord.id,
+          quantity: 1
+        }
+        req.session.cart.cartRecords.push(existingCartRecord)
       }
-      req.session.cart.Records.push(foundRecord)
-      res.send({record: foundRecord, isDuplicate})
+
+      res.send({Record: {...foundRecord, RecordOrder: existingCartRecord}})
     }
   } catch (error) {
     console.log(error)

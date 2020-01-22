@@ -4,7 +4,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchCart} from '../store/cart'
-import {Order} from './single-cart'
+import {CartItem} from './cart-item'
 
 class Cart extends React.Component {
   componentDidMount() {
@@ -22,10 +22,11 @@ class Cart extends React.Component {
             <h3>Nothing in your cart yet!</h3>
           ) : (
             this.props.cart.map(record => {
-              total += record.RecordOrder.soldPrice / 100
+              console.log('record in component', record)
+              total += record.price / 100
               return (
                 <div key={record.id} record={record}>
-                  <Order
+                  <CartItem
                     key={record.id}
                     record={record}
                     className="OrderHistory"
