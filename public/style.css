@@ -135,3 +135,10 @@ hr {
   right: 5%;
   background-color: transparent;
 }
+
+#name img {
+  border-radius: 1%;
+  height: 150px;
+  width: auto;
+  box-shadow: 10px 10px;
+}
