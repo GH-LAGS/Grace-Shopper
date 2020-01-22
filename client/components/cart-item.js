@@ -1,7 +1,10 @@
 import React from 'react'
 import {Grommet, Button, Box, Text, Image} from 'grommet'
+import {addToCart} from '../store/cart'
+import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
 
-export const Order = props => {
+export const CartItem = props => {
   return (
     <Box
       direction="row"
@@ -34,18 +37,33 @@ export const Order = props => {
       <Text direction="row-responsive" justify="center">
         {props.record.artist}
       </Text>
+      <Button
+        onClick={() => props.removeFromCart(props.record.id)}
+        direction="row-responsive"
+        justify="center"
+      >
+        -
+      </Button>
       <Text direction="row-responsive" justify="center">
         Qty: {props.record.RecordOrder.quantity}
       </Text>
-      <Button direction="row-responsive" justify="center">
-        Add
-      </Button>
-      <Button direction="row-responsive" justify="center">
-        Delete
+      <Button
+        onClick={() => props.addToCart(props.record.id)}
+        direction="row-responsive"
+        justify="center"
+      >
+        +
       </Button>
       <Text direction="row-responsive" justify="center">
-        Price: {`$${props.record.RecordOrder.soldPrice / 100}`}
+        Price: {`$${props.record.price / 100}`}
       </Text>
     </Box>
   )
+}
+
+export default CartItem
+
+CartItem.propTypes = {
+  addToCart: PropTypes.func.isRequired,
+  removeFromCart: PropTypes.func.isRequired
 }
