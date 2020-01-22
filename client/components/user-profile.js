@@ -2,19 +2,27 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import OrderHistory from './order-history'
+import {fetchCart} from '../store/cart'
 
 /**
  * COMPONENT
  */
-export const UserProfile = props => {
-  const {email} = props
+class UserProfile extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+  componentDidMount() {
+    this.props.getCart()
+  }
 
-  return (
-    <div>
-      <h3>Welcome, {email}</h3>
-      <OrderHistory />
-    </div>
-  )
+  render() {
+    return (
+      <div>
+        <h3>Welcome, {this.props.email}</h3>
+        <OrderHistory />
+      </div>
+    )
+  }
 }
 
 /**
@@ -26,7 +34,15 @@ const mapState = state => {
   }
 }
 
-export default connect(mapState)(UserProfile)
+const mapDispatch = dispatch => {
+  return {
+    getCart: () => {
+      dispatch(fetchCart())
+    }
+  }
+}
+
+export default connect(mapState, mapDispatch)(UserProfile)
 
 /**
  * PROP TYPES

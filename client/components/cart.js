@@ -13,7 +13,7 @@ class Cart extends React.Component {
   render() {
     return (
       <div>
-        {console.log('in component', this.props.cart[0].cartQuantity)}
+        {/* {console.log('in component', this.props.cart[0].cartQuantity)} */}
         <h1>Shopping Cart</h1>
         {this.props.cart === undefined ? (
           <h4>'waiting for cart'</h4>
