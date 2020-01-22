@@ -5,10 +5,10 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   if (!req.user) {
     if (req.session.cart) {
-      let cartRecords = req.session.cartRecords
+      let cartRecords = req.session.cart.cartRecords
       let records = []
       for (const cartRecord of cartRecords) {
-        const record = await Record.findByPk(cartRecord.recordId)
+        const record = (await Record.findByPk(cartRecord.recordId)).toJSON()
         record.RecordOrder = cartRecord
         records.push(record)
       }

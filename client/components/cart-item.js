@@ -51,7 +51,7 @@ export const CartItem = props => {
         +
       </Button> */}
       <Text direction="row-responsive" justify="center">
-        Price: {`$${props.record.RecordOrder.soldPrice / 100}`}
+        Price: {`$${props.record.price / 100}`}
       </Text>
     </Box>
   )
