@@ -45,8 +45,6 @@ class Cart extends React.Component {
           <button type="button" id="checkout">
             Checkout
           </button>
-          <br />
-          <Link to="/preview">Order Preview Page</Link>
         </div>
       </div>
     )

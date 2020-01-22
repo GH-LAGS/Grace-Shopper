@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
-class OrderPreview extends React.Component {
+class OrderForm extends React.Component {
   render() {
     return (
       <div>
@@ -23,4 +23,4 @@ class OrderPreview extends React.Component {
   }
 }
 
-export default OrderPreview
+export default OrderForm

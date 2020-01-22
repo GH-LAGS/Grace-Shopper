@@ -80,7 +80,6 @@ export default function(state = defaultCart, action) {
           updatedRecord,
           ...state.slice(indexInState + 1)
         ]
-        recordInState.RecordOrder.quantity++
       } else {
         return [...state, action.record]
       }

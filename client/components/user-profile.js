@@ -8,9 +8,6 @@ import {fetchCart} from '../store/cart'
  * COMPONENT
  */
 class UserProfile extends React.Component {
-  constructor(props) {
-    super(props)
-  }
   componentDidMount() {
     this.props.getCart()
   }
