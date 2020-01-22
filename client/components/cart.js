@@ -5,14 +5,22 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchCart, addToCart, removeFromCart} from '../store/cart'
 import {CartItem} from './cart-item'
+import OrderForm from './order-form'
 
 class Cart extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {checkout: false}
+    this.state = {
+      checkout: false
+    }
+    this.handleSubmitClick = this.handleSubmitClick.bind(this)
   }
   componentDidMount() {
     this.props.getCart()
+  }
+
+  handleSubmitClick() {
+    this.setState({checkout: true})
   }
 
   render() {
@@ -42,10 +50,11 @@ class Cart extends React.Component {
             })
           )}
           <h3 id="totalPrice">Total Price: {`$${total}`}</h3>
-          <button type="button" id="checkout">
+          <button type="button" id="checkout" onClick={this.handleSubmitClick}>
             Checkout
           </button>
         </div>
+        <div>{this.state.checkout && <OrderForm />}</div>
       </div>
     )
   }
@@ -63,6 +72,7 @@ const mapDispatchToProps = dispatch => {
     getCart: () => dispatch(fetchCart()),
     addToCart: recordId => dispatch(addToCart(recordId)),
     removeFromCart: recordId => dispatch(removeFromCart(recordId))
+    // handleSubmitClick: () => this.setState({checkout: true})
   }
 }
 
