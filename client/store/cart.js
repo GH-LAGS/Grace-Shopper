@@ -4,6 +4,7 @@ import Axios from 'axios'
 const GOT_CART = 'GOT_CART'
 const ADDED_TO_CART = 'ADDED_TO_CART'
 const REMOVED_FROM_CART = 'REMOVED_FROM_CART'
+const CHECKOUT = 'CHECKOUT'
 
 // INITIAL STATE
 const defaultCart = []
@@ -18,6 +19,7 @@ const removedFromCart = recordId => ({
   type: REMOVED_FROM_CART,
   recordId
 })
+const checkout = () => ({type: CHECKOUT})
 
 //THUNK CREATORS
 export const fetchCart = () => async dispatch => {
@@ -42,6 +44,15 @@ export const removeFromCart = id => async dispatch => {
   try {
     await Axios.delete(`/api/cart/${id}`)
     dispatch(removedFromCart(id))
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const completeOrder = () => async dispatch => {
+  try {
+    await Axios.post('/api/order/')
+    dispatch(checkout())
   } catch (error) {
     console.log(error)
   }
@@ -97,7 +108,8 @@ export default function(state = defaultCart, action) {
           ...state.slice(foundRecordIndex + 1)
         ]
       }
-
+    case CHECKOUT:
+      return []
     default:
       return state
   }

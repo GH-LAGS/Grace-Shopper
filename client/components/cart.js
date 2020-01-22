@@ -7,6 +7,10 @@ import {fetchCart, addToCart, removeFromCart} from '../store/cart'
 import {CartItem} from './cart-item'
 
 class Cart extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {checkout: false}
+  }
   componentDidMount() {
     this.props.getCart()
   }
