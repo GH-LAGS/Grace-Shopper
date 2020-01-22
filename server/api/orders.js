@@ -68,12 +68,12 @@ router.post('/', async (req, res, next) => {
       guestCart.Records.forEach(async record => {
         //update totalPrice and quantity
         totalPrice += record.price
-        record.decrement({quantity})
-        const createdRecordOrder = createdRecordOrders.filter(
+        record.decrement('quantity')
+        const createdRecordOrder = createdRecordOrders.find(
           recordOrder => recordOrder.title === record.title
         )
         if (createdRecordOrder) {
-          await createdRecordOrder.increment(quantity)
+          await createdRecordOrder.increment('quantity')
         } else {
           const newRecordOrder = await RecordOrder.create({
             orderId: order.id,
