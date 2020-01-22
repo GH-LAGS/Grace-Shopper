@@ -44,7 +44,8 @@ router.post('/:id', async (req, res, next) => {
   const foundRecord = await Record.findOne({
     where: {
       id: id
-    }
+    },
+    raw: true // convert sequelize obj -> js obj to add properties
   })
   try {
     let recordOrder

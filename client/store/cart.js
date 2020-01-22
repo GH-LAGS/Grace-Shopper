@@ -27,9 +27,7 @@ export const fetchCart = () => async dispatch => {
 export const addToCart = id => async dispatch => {
   try {
     const res = await Axios.post(`/api/cart/${id}`)
-    dispatch(
-      addedToCart({...res.data.record, recordOrder: {...res.data.recordOrder}})
-    )
+    dispatch(addedToCart(res.data.Record))
   } catch (error) {
     console.log(error)
   }

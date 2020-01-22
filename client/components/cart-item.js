@@ -57,17 +57,7 @@ export const CartItem = props => {
   )
 }
 
-const mapStateToProps = state => {
-  return {state: state.cart}
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    // addToCart: recordId => dispatch(addToCart(recordId))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CartItem)
+export default CartItem
 
 CartItem.propTypes = {
   // addToCart: PropTypes.func.isRequired
