@@ -53,13 +53,14 @@ const AuthForm = props => {
           <input name="password" type="password" />
         </div> */}
           {/* <div> */}
-          <Button type="submit" label={displayName} />
+          <Button type="submit" label={displayName} color="#5FA782" />
           {/* </div> */}
           {error && error.response && <div> {error.response.data} </div>}
         </Box>
       </Form>
       <Anchor
         href="/auth/google"
+        color="#5FA782"
         primary
         label={`${displayName} with Google`}
       />
