@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 import {fetchCart, addToCart, removeFromCart} from '../store/cart'
 import {CartItem} from './cart-item'
 import OrderForm from './order-form'
+import {Button} from 'grommet'
 
 class Cart extends React.Component {
   constructor(props) {
@@ -50,11 +51,21 @@ class Cart extends React.Component {
             })
           )}
           <h3 id="totalPrice">Total Price: {`$${total}`}</h3>
-          <button type="button" id="checkout" onClick={this.handleSubmitClick}>
-            Checkout
-          </button>
+          <Button
+            type="button"
+            id="checkout"
+            label="Checkout"
+            color="#5FA782"
+            onClick={this.handleSubmitClick}
+          />
         </div>
-        <div>{this.state.checkout && <OrderForm />}</div>
+        <div>
+          {this.props.cart.length ? (
+            this.state.checkout && <OrderForm />
+          ) : (
+            <div> </div>
+          )}
+        </div>
       </div>
     )
   }
@@ -72,7 +83,6 @@ const mapDispatchToProps = dispatch => {
     getCart: () => dispatch(fetchCart()),
     addToCart: recordId => dispatch(addToCart(recordId)),
     removeFromCart: recordId => dispatch(removeFromCart(recordId))
-    // handleSubmitClick: () => this.setState({checkout: true})
   }
 }
 

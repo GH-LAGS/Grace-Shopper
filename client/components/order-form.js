@@ -1,28 +1,55 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {Form, Button, FormField, TextInput} from 'grommet'
+import {
+  Grommet,
+  Box,
+  Text,
+  Form,
+  Button,
+  FormField,
+  TextInput,
+  Heading
+} from 'grommet'
 
 class OrderForm extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
   render() {
     return (
       <div>
-        <h3>Place your order:</h3>
+        <Heading>Place your order:</Heading>
 
-        <div>
-          <button type="submit" id="submit-order">
-            Place Your Order
-          </button>
-        </div>
-        <h3>
-          <Link to="/cart">Back to cart</Link>
-        </h3>
-        <h3>
-          <Link to="/">Continue Shopping</Link>
-        </h3>
+        <Form onSubmit={this.props.handlePlaceOrderSubmit}>
+          <FormField htmlFor="address" label="Shipping Address">
+            <TextInput name="address" type="text" />
+          </FormField>
+
+          <Button type="submit" label="Place Order" color="#5FA782" />
+        </Form>
       </div>
     )
   }
 }
 
-export default OrderForm
+//CONTAINER
+
+const mapStateToProps = state => {
+  return {
+    cart: state.cart,
+    user: state.user
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    handlePlaceOrderSubmit(evt) {
+      evt.preventDefault()
+      console.log('Place Order Button Clicked')
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderForm)
