@@ -12,6 +12,7 @@ class Cart extends React.Component {
   }
 
   render() {
+    let total = 0
     return (
       <div className="allPastOrders">
         <h1>Cart: </h1>

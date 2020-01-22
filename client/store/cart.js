@@ -9,7 +9,7 @@ const REMOVED_FROM_CART = 'REMOVED_FROM_CART'
 const defaultCart = []
 
 // ACTION CREATORS
-const gotCart = cart => ({type: GOT_CART, cart})
+export const gotCart = cart => ({type: GOT_CART, cart})
 const addedToCart = record => ({
   type: ADDED_TO_CART,
   record
