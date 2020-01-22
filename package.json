@@ -30,7 +30,6 @@
   "lint-staged": {
     "*.{js,jsx}": [
       "prettier --write",
-      "npm run lint-fix",
       "git add"
     ],
     "*.{css,scss,json,md}": [
@@ -47,6 +46,7 @@
     "express": "^4.16.4",
     "express-session": "^1.17.0",
     "grommet": "^2.10.0",
+    "grommet-icons": "^4.4.0",
     "history": "^4.10.1",
     "morgan": "^1.9.1",
     "passport": "^0.4.1",

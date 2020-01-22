@@ -9,7 +9,7 @@ const Navbar = ({handleClick, isLoggedIn, cart}) => (
   <Header background="#D85434" pad="medium">
     <Box direction="row" align="center" gap="small">
       <Link to="/allproducts" className="navLink" id="name">
-        <h1>LAGS RECORDS</h1>
+        <img alt="LAGS logo" src="/logo.png" />
       </Link>
     </Box>
 
