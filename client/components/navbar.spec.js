@@ -21,8 +21,8 @@ describe('Navbar Component', () => {
     )
   })
 
-  it('renders HTML header', () => {
-    expect(navbar.find('h1').text()).to.be.equal('LAGS RECORDS')
+  it('renders img header', () => {
+    expect(navbar.find('img').prop('src')).to.be.equal('/logo.png')
   })
   it('renders switch links to routes', () => {
     expect(navbar.find('Link').length).to.be.equal(4)
