@@ -46,6 +46,6 @@ const mapDispatchToProps = dispatch => {
 
 export default connect(null, mapDispatchToProps)(Record)
 
-Record.propTypes = {
-  addToCart: PropTypes.func.isRequired
-}
+// Record.propTypes = {
+//   addToCart: PropTypes.func.isRequired
+// }

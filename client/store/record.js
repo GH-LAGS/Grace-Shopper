@@ -7,7 +7,7 @@ const GET_ALL_RECORDS = 'GET_ALL_RECORDS'
 const defaultRecords = []
 
 // ACTION CREATORS
-const gotAllRecords = records => ({
+export const gotAllRecords = records => ({
   type: GET_ALL_RECORDS,
   records
 })

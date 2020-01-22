@@ -12,7 +12,6 @@ class Cart extends React.Component {
   }
 
   render() {
-    let total = 0
     return (
       <div className="allPastOrders">
         <h1>Cart: </h1>
@@ -65,3 +64,9 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart)
+
+// TO DO
+// Add prop types
+// Navbar.propTypes = {
+//   handleClick: PropTypes.func.isRequired,
+// }
