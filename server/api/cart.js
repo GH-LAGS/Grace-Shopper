@@ -9,10 +9,8 @@ router.get('/', async (req, res, next) => {
       let records = []
       for (const cartRecord of cartRecords) {
         const record = await Record.findByPk(cartRecord.recordId)
-        records.push({
-          ...record,
-          RecordOrder: cartRecord
-        })
+        record.RecordOrder = cartRecord
+        records.push(record)
       }
       res.send({Records: records})
     } else {
@@ -48,7 +46,6 @@ router.post('/:id', async (req, res, next) => {
       id: id
     }
   })
-  console.log('FoundRecord:', foundRecord)
   try {
     let recordOrder
     //if logged in
@@ -76,16 +73,12 @@ router.post('/:id', async (req, res, next) => {
           recordId: foundRecord.id,
           orderId: newCart.id
         })
+        foundRecord.RecordOrder = recordOrder
         res.send({
-          Record: {
-            ...foundRecord,
-            RecordOrder: recordOrder
-          }
+          Record: foundRecord
         })
       } else {
-        console.log('in duplicate else statement')
         //check cart for if recordOrder matching record id already exists
-        //BUG FOR TOMORROW, not recognizing duplicates
         const duplicate = await RecordOrder.findOne({
           where: {
             orderId: foundCart.id,
@@ -97,12 +90,8 @@ router.post('/:id', async (req, res, next) => {
           await duplicate.update({
             quantity: duplicate.quantity + 1 //check this later
           })
-          res.send({
-            Record: {
-              ...foundRecord,
-              RecordOrder: recordOrder
-            }
-          })
+          foundRecord.RecordOrder = duplicate
+          res.json({Record: foundRecord})
         } else {
           //create new row in RecordOrder and assign foreign
           recordOrder = await RecordOrder.create({
@@ -111,11 +100,9 @@ router.post('/:id', async (req, res, next) => {
             recordId: foundRecord.id,
             orderId: foundCart.id
           })
+          foundRecord.RecordOrder = recordOrder
           res.send({
-            Record: {
-              ...foundRecord,
-              RecordOrder: recordOrder
-            }
+            Record: foundRecord
           })
         }
       }
@@ -140,7 +127,8 @@ router.post('/:id', async (req, res, next) => {
         req.session.cart.cartRecords.push(existingCartRecord)
       }
 
-      res.send({Record: {...foundRecord, RecordOrder: existingCartRecord}})
+      foundRecord.RecordOrder = existingCartRecord
+      res.send({Record: foundRecord})
     }
   } catch (error) {
     console.log(error)
