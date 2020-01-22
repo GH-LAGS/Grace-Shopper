@@ -5,6 +5,7 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     if (req.user.id) {
+      console.log('found user')
       const userOrders = await Order.findAll({
         where: {
           userId: req.user.id,
@@ -33,19 +34,33 @@ router.post('/', async (req, res, next) => {
           userId: req.user.id,
           status: 'pending'
         },
-        include: {model: RecordOrder}
+        include: {model: Record}
       })
-      console.log('ORDER', order)
-      // const recordOrders = await RecordOrder.findAll({
-      //   where:{
-      //     orderId
-      //   }
-      // })
+      console.log('ORDER', order.id)
+
+      const recordOrders = await RecordOrder.findAll({
+        where: {
+          orderId: order.id
+        }
+      })
+      console.log('RECORDS', recordOrders)
+
+      let totalPrice = 0
+
+      for (let i = 0; i < recordOrders.length; i++) {
+        const item = recordOrders[i]
+        const lineTotal = item.soldPrice * item.quantity
+        totalPrice += lineTotal
+      }
+
+      console.log(totalPrice)
+
       order = await Order.update(
         {
-          date: newDate(),
-          address: 'GET FROM REQ', //add address
-          status: 'completed'
+          date: new Date().toString(),
+          address: req.address, //add address
+          status: 'completed',
+          totalPrice: totalPrice
         },
         {
           where: {

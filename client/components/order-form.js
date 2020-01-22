@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {completeOrder} from '../store/cart'
 import {
   Grommet,
   Box,
@@ -47,6 +48,9 @@ const mapDispatchToProps = dispatch => {
   return {
     handlePlaceOrderSubmit(evt) {
       evt.preventDefault()
+      const address = evt.target.address.value
+      dispatch(completeOrder(address))
+
       console.log('Place Order Button Clicked')
     }
   }
