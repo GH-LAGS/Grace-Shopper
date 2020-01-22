@@ -8,8 +8,8 @@ const ADD_TO_CART = 'ADD_TO_CART'
 const defaultCart = []
 
 // ACTION CREATORS
-const gotCart = cart => ({type: GOT_CART, cart})
-const addedToCart = record => ({
+export const gotCart = cart => ({type: GOT_CART, cart})
+export const addedToCart = record => ({
   type: ADD_TO_CART,
   record
 })

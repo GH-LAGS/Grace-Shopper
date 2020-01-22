@@ -6,7 +6,7 @@ import axios from 'axios'
 import {fetchRecords} from '../store/record'
 import {Grommet, Box, Grid, Text, Button} from 'grommet'
 
-class AllProducts extends React.Component {
+export class UnconnectAllProducts extends React.Component {
   componentDidMount() {
     this.props.getAllRecords()
   }
@@ -15,7 +15,7 @@ class AllProducts extends React.Component {
     return (
       <div className="container">
         {this.props.records.length === 0 ? (
-          <h3>no records to show yet</h3>
+          <h2>no records to show yet</h2>
         ) : (
           this.props.records.map(record => {
             return <Record key={record.id} record={record} />
@@ -54,4 +54,6 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AllProducts)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  UnconnectAllProducts
+)
