@@ -2,7 +2,7 @@ import Axios from 'axios'
 
 // ACTION TYPES
 const GOT_CART = 'GOT_CART'
-const ADDED_TO_CART = 'ADD_TO_CART'
+const ADDED_TO_CART = 'ADDED_TO_CART'
 const REMOVED_FROM_CART = 'REMOVED_FROM_CART'
 
 // INITIAL STATE
@@ -11,7 +11,7 @@ const defaultCart = []
 // ACTION CREATORS
 const gotCart = cart => ({type: GOT_CART, cart})
 const addedToCart = record => ({
-  type: ADD_TO_CART,
+  type: ADDED_TO_CART,
   record
 })
 const removedFromCart = recordId => ({
