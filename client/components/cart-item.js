@@ -37,19 +37,23 @@ export const CartItem = props => {
       <Text direction="row-responsive" justify="center">
         {props.record.artist}
       </Text>
-      <Button direction="row-responsive" justify="center">
+      <Button
+        onClick={() => props.removeFromCart(props.record.id)}
+        direction="row-responsive"
+        justify="center"
+      >
         -
       </Button>
       <Text direction="row-responsive" justify="center">
         Qty: {props.record.RecordOrder.quantity}
       </Text>
-      {/* <Button
+      <Button
         onClick={() => props.addToCart(props.record.id)}
         direction="row-responsive"
         justify="center"
       >
         +
-      </Button> */}
+      </Button>
       <Text direction="row-responsive" justify="center">
         Price: {`$${props.record.price / 100}`}
       </Text>
@@ -60,5 +64,6 @@ export const CartItem = props => {
 export default CartItem
 
 CartItem.propTypes = {
-  // addToCart: PropTypes.func.isRequired
+  addToCart: PropTypes.func.isRequired,
+  removeFromCart: PropTypes.func.isRequired
 }

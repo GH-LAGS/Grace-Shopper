@@ -135,3 +135,49 @@ router.post('/:id', async (req, res, next) => {
     console.log(error)
   }
 })
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    if (req.user) {
+      const order = await Order.findOne({
+        where: {
+          userId: user.id,
+          status: 'pending'
+        }
+      })
+      const recordOrders = await RecordOrders.findAll({
+        where: {
+          orderId: order.id
+        }
+      })
+      const foundRecordOrder = recordOrders.find(
+        recordOrder => recordOrder.recordId === req.params.id
+      )
+      if (foundRecordOrder.quantity === 1) {
+        await foundRecordOrder.destroy()
+      } else {
+        await foundRecord.decrement('quantity')
+      }
+      res.sendStatus(204)
+    } else {
+      // Update session for guest
+      const cartRecords = req.session.cart.cartRecords
+
+      const recordIndex = cartRecords.findIndex(
+        cartRecord => cartRecord.recordId == req.params.id
+      )
+
+      if (cartRecords[recordIndex].quantity === 1) {
+        req.session.cart.cartRecords = [
+          ...cartRecords.slice(0, recordIndex),
+          ...cartRecords.slice(recordIndex + 1)
+        ]
+      } else {
+        cartRecords[recordIndex].quantity--
+      }
+      res.sendStatus(204)
+    }
+  } catch (error) {
+    next(error)
+  }
+})
