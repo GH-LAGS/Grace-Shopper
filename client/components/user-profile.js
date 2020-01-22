@@ -44,7 +44,7 @@ const mapDispatch = dispatch => {
 
 export default connect(mapState, mapDispatch)(DisconnectedUserProfile)
 
-/**
+/*
  * PROP TYPES
  */
 DisconnectedUserProfile.propTypes = {
