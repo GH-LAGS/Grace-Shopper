@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Order, RecordOrder, Record} = require('../db/models')
+const {Order, Record, RecordOrder} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -26,26 +26,34 @@ router.post('/', async (req, res, next) => {
     let order
     // User -> change order to complete
     if (req.user) {
-      // calculate total price, add date, address
-      // find order first
+      // Find Order
       order = await Order.findOne({
         where: {
           userId: req.user.id,
           status: 'pending'
         },
-        include: {model: RecordOrder}
+        include: {model: Record}
       })
-      console.log('ORDER', order)
-      // const recordOrders = await RecordOrder.findAll({
-      //   where:{
-      //     orderId
-      //   }
-      // })
+
+      // Calculate totalPrice
+      let totalPrice = 0
+      const recordOrders = await RecordOrder.findAll({
+        where: {
+          orderId: order.id
+        }
+      })
+      for (let i = 0; i < recordOrders.length; i++) {
+        const item = recordOrders[i]
+        const lineTotal = item.soldPrice * item.quantity
+        totalPrice += lineTotal
+      }
+      // To-Do Should also decrease stock (Also check on front-end on all-products page)
       order = await Order.update(
         {
-          date: newDate(),
-          address: 'GET FROM REQ', //add address
-          status: 'completed'
+          date: new Date().toString(),
+          address: req.body.address,
+          status: 'completed',
+          totalPrice: totalPrice
         },
         {
           where: {
@@ -56,37 +64,30 @@ router.post('/', async (req, res, next) => {
       )
     } else {
       // Guest -> create complete order
-      const guestCart = req.session.cart.Records
+      console.log('CART', req.session.cart)
+      const guestCart = req.session.cart.cartRecords
       let totalPrice = 0
       order = await Order.create({
-        date: new Date(),
-        address: 'req.address',
+        date: new Date().toString(),
+        address: req.body.address,
         status: 'complete'
       })
-      // Create RecordOrders or update existing
-      const createdRecordOrders = []
-      guestCart.Records.forEach(async record => {
+      // Create RecordOrders
+      for (const cartRecord of guestCart) {
         //update totalPrice and quantity
-        totalPrice += record.price
-        record.decrement('quantity')
-        const createdRecordOrder = createdRecordOrders.find(
-          recordOrder => recordOrder.title === record.title
-        )
-        if (createdRecordOrder) {
-          await createdRecordOrder.increment('quantity')
-        } else {
-          const newRecordOrder = await RecordOrder.create({
-            orderId: order.id,
-            recordId: record.id,
-            quantity: 1,
-            soldPrice: record.price
-          })
-          createdRecordOrders.push({[record.title]: newRecordOrder})
-        }
-      })
+        const record = await Record.findByPk(cartRecord.recordId)
+        totalPrice += record.price * cartRecord.quantity
+        console.log(record.price * cartRecord.quantity)
+        const newRecordOrder = await RecordOrder.create({
+          orderId: order.id,
+          recordId: record.id,
+          quantity: cartRecord.quantity,
+          soldPrice: record.price
+        })
+      }
       order.totalPrice = totalPrice
-      order.save()
-      req.session.cart = {Records: []}
+      await order.save()
+      req.session.cart = {cartRecords: []}
     }
     res.status(200).send()
   } catch (err) {

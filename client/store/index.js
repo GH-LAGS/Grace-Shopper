@@ -7,7 +7,7 @@ import records from './record'
 import cart from './cart'
 import orders from './orders'
 
-const reducer = combineReducers({user, records, cart, orders})
+export const reducer = combineReducers({user, records, cart, orders})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )

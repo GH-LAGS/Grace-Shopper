@@ -32,7 +32,7 @@ describe('Order History Component', () => {
     expect(order.contains('Hot Pink')).to.equal(true)
   })
 
-  it.only('correctly recognizes className', () => {
+  it('correctly recognizes className', () => {
     expect(order.hasClass('singleOrder')).to.equal(true)
   })
 })

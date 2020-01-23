@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {Form, Button, FormField, TextInput, Heading} from 'grommet'
 import {CardElement, injectStripe} from 'react-stripe-elements'
+import {completeOrder} from '../store/cart'
+import {Form, Button, FormField, TextInput, Heading} from 'grommet'
 
 class OrderForm extends React.Component {
   constructor(props) {
@@ -55,6 +55,9 @@ const mapDispatchToProps = dispatch => {
   return {
     handlePlaceOrderSubmit(evt) {
       evt.preventDefault()
+      const address = evt.target.address.value
+      dispatch(completeOrder(address))
+
       console.log('Place Order Button Clicked')
     }
   }
