@@ -30,8 +30,8 @@ class Cart extends React.Component {
         <h1>Cart: </h1>
         <hr />
         <div className="singlePastOrder">
-          {this.props.cart === undefined ? (
-            <h3>Nothing in your cart yet!</h3>
+          {this.props.cart.length === 0 ? (
+            <h3>There are currently no items in the cart.</h3>
           ) : (
             this.props.cart.map(record => {
               total += record.price * record.RecordOrder.quantity / 100
@@ -49,14 +49,21 @@ class Cart extends React.Component {
               )
             })
           )}
-          <h3 id="totalPrice">Total Price: {`$${total}`}</h3>
-          <Button
-            type="button"
-            id="checkout"
-            label="Checkout"
-            color="#5FA782"
-            onClick={this.handleSubmitClick}
-          />
+          {!this.props.cart || this.props.cart.length === 0 ? (
+            <div />
+          ) : (
+            <div>
+              {' '}
+              <h3 id="totalPrice">Total Price: {`$${total}`}</h3>
+              <Button
+                type="button"
+                id="checkout"
+                label="Checkout"
+                color="#5FA782"
+                onClick={this.handleSubmitClick}
+              />
+            </div>
+          )}
         </div>
         <div>
           {this.props.cart.length ? (
