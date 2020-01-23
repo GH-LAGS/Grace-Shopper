@@ -51,7 +51,6 @@ export const removeFromCart = id => async dispatch => {
 
 export const completeOrder = address => async dispatch => {
   try {
-    console.log('got address in thunk', address)
     await Axios.post('/api/orders/', {address: address})
     dispatch(checkout())
   } catch (error) {
