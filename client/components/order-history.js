@@ -18,9 +18,25 @@ export class OrderHistory extends React.Component {
             <h3>No order history yet!</h3>
           ) : (
             this.props.orders.map(order => {
+              let orderDate = order.date
+              console.log(
+                order.date,
+                typeof order.date,
+                new Date(order.date).toISOString()
+              )
+              if (!orderDate.includes('/')) {
+                let date = new Date(order.date)
+                let year = date.getFullYear()
+                let month = (1 + date.getMonth()).toString()
+                month = month.length > 1 ? month : '0' + month
+                let day = date.getDate().toString()
+                day = day.length > 1 ? day : '0' + day
+                orderDate = month + '/' + day + '/' + year
+              }
+
               return (
                 <div key={order.id} order={order}>
-                  <h3 id="datePurchased">Purchased on {order.date}</h3>
+                  <h3 id="datePurchased">Purchased on {orderDate}</h3>
                   {order.Records.map(record => {
                     return (
                       <Order

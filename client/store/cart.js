@@ -11,7 +11,7 @@ const CLEAR_CART = 'CLEAR_CART'
 const defaultCart = []
 
 // ACTION CREATORS
-const gotCart = cart => ({type: GOT_CART, cart})
+export const gotCart = cart => ({type: GOT_CART, cart})
 const addedToCart = record => ({
   type: ADDED_TO_CART,
   record
@@ -54,7 +54,6 @@ export const removeFromCart = id => async dispatch => {
 
 export const completeOrder = address => async dispatch => {
   try {
-    console.log('got address in thunk', address)
     await Axios.post('/api/orders/', {address: address})
     dispatch(checkout())
   } catch (error) {

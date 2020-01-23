@@ -27,12 +27,13 @@ export const Record = props => {
       <Text direction="row-responsive" justify="center">{`$${props.record
         .price / 100}`}</Text>
       <Button
+        label="+ Add To Cart"
         onClick={() => props.addToCart(props.record.id)}
         direction="row-responsive"
-        justify="center"
-      >
-        Add To Cart
-      </Button>
+        primary
+        color="#EC6101"
+        hoverIndicartor="true"
+      />
     </Box>
   )
 }
@@ -45,6 +46,6 @@ const mapDispatchToProps = dispatch => {
 
 export default connect(null, mapDispatchToProps)(Record)
 
-Record.propTypes = {
-  addToCart: PropTypes.func.isRequired
-}
+// Record.propTypes = {
+//   addToCart: PropTypes.func.isRequired
+// }

@@ -1,6 +1,5 @@
 import React from 'react'
 // import PropTypes from 'prop-types'
-// import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchCart, addToCart, removeFromCart} from '../store/cart'
@@ -35,7 +34,7 @@ class Cart extends React.Component {
             <h3>Nothing in your cart yet!</h3>
           ) : (
             this.props.cart.map(record => {
-              total += record.price / 100
+              total += record.price * record.RecordOrder.quantity / 100
               return (
                 <div key={record.id} record={record}>
                   <CartItem
@@ -87,3 +86,9 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart)
+
+// TO DO
+// Add prop types
+// Navbar.propTypes = {
+//   handleClick: PropTypes.func.isRequired,
+// }

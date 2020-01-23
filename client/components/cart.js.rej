@@ -1,0 +1,4 @@
+diff a/client/components/cart.js b/client/components/cart.js	(rejected hunks)
+@@ -25 +25 @@ class Cart extends React.Component {
+-              total += (record.price * record.RecordOrder.quantity) / 100
++              total += record.price * record.RecordOrder.quantity / 100
