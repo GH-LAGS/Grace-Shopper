@@ -8,7 +8,7 @@ export {default as userprofile} from './user-profile'
 export {Login, Signup} from './auth-form'
 
 export {default as Cart} from './cart'
-export {default as OrderPreview} from './order-preview'
+export {default as OrderForm} from './order-form'
 
 export {default as AllProducts} from './all-products'
 export {default as Record} from './record'

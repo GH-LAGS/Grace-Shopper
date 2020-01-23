@@ -89,7 +89,7 @@ router.post('/:id', async (req, res, next) => {
 
         if (duplicate) {
           await duplicate.update({
-            quantity: duplicate.quantity + 1 //check this later
+            quantity: duplicate.quantity + 1
           })
           foundRecord.RecordOrder = duplicate
           res.json({Record: foundRecord})

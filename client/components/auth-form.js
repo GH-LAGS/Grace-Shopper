@@ -26,7 +26,7 @@ const AuthForm = props => {
       justify="start"
       align="center"
       alignContent="start"
-      pad="large"
+      pad="xsmall"
       gap="xsmall"
       round="small"
       margin="medium"

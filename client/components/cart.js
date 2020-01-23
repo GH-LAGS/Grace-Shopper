@@ -4,10 +4,23 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchCart, addToCart, removeFromCart} from '../store/cart'
 import {CartItem} from './cart-item'
+import OrderForm from './order-form'
+import {Button} from 'grommet'
 
 class Cart extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      checkout: false
+    }
+    this.handleSubmitClick = this.handleSubmitClick.bind(this)
+  }
   componentDidMount() {
     this.props.getCart()
+  }
+
+  handleSubmitClick() {
+    this.setState({checkout: true})
   }
 
   render() {
@@ -17,8 +30,8 @@ class Cart extends React.Component {
         <h1>Cart: </h1>
         <hr />
         <div className="singlePastOrder">
-          {this.props.cart === undefined ? (
-            <h3>Nothing in your cart yet!</h3>
+          {this.props.cart.length === 0 ? (
+            <h3>There are currently no items in the cart.</h3>
           ) : (
             this.props.cart.map(record => {
               total += record.price * record.RecordOrder.quantity / 100
@@ -36,12 +49,28 @@ class Cart extends React.Component {
               )
             })
           )}
-          <h3 id="totalPrice">Total Price: {`$${total}`}</h3>
-          <button type="button" id="checkout">
-            Checkout
-          </button>
-          <br />
-          <Link to="/preview">Order Preview Page</Link>
+          {!this.props.cart || this.props.cart.length === 0 ? (
+            <div />
+          ) : (
+            <div>
+              {' '}
+              <h3 id="totalPrice">Total Price: {`$${total}`}</h3>
+              <Button
+                type="button"
+                id="checkout"
+                label="Checkout"
+                color="#5FA782"
+                onClick={this.handleSubmitClick}
+              />
+            </div>
+          )}
+        </div>
+        <div>
+          {this.props.cart.length ? (
+            this.state.checkout && <OrderForm />
+          ) : (
+            <div> </div>
+          )}
         </div>
       </div>
     )
