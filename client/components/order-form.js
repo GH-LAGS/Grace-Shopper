@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {CardElement, injectStripe} from 'react-stripe-elements'
 import {completeOrder} from '../store/cart'
 import {Form, Button, FormField, TextInput, Heading} from 'grommet'
-import {Link} from 'react-router-dom'
+import {Redirect} from 'react-router'
 
 class OrderForm extends React.Component {
   constructor(props) {
@@ -11,6 +11,7 @@ class OrderForm extends React.Component {
     this.firstNameRef = React.createRef()
     this.lastNameRef = React.createRef()
     this.addressRef = React.createRef()
+    this.state = {complete: false}
   }
 
   handlePlaceOrderSubmit = async evt => {
@@ -27,9 +28,12 @@ class OrderForm extends React.Component {
 
     let {token} = await this.props.stripe.createToken({name: 'Name'})
     await this.props.completeOrder({address, stripeToken: token.id})
+    this.setState({complete: true})
   }
 
   render() {
+    if (this.state.complete) return <Redirect to="/success" />
+
     return (
       <div>
         <div className="checkout" />

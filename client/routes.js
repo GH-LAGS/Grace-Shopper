@@ -7,8 +7,8 @@ import {
   Signup,
   userprofile,
   Cart,
-  OrderPreview,
-  AllProducts
+  AllProducts,
+  OrderSuccess
 } from './components'
 import {me} from './store'
 
@@ -30,6 +30,7 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/cart" component={Cart} />
+        <Route path="/success" component={OrderSuccess} />
         {isLoggedIn && <Route path="/home" component={userprofile} />}
         {/* Displays our Login component as a fallback */}
         <Route path="/" component={AllProducts} />
