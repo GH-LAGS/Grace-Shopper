@@ -3,40 +3,46 @@ import {connect} from 'react-redux'
 import {CardElement, injectStripe} from 'react-stripe-elements'
 import {completeOrder} from '../store/cart'
 import {Form, Button, FormField, TextInput, Heading} from 'grommet'
+import {Link} from 'react-router-dom'
 
 class OrderForm extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {complete: false}
-    this.submit = this.submit.bind(this)
+    this.firstNameRef = React.createRef()
+    this.lastNameRef = React.createRef()
+    this.addressRef = React.createRef()
   }
-  async submit(ev) {
-    let {token} = await this.props.stripe.createToken({name: 'Name'})
-    let response = await fetch('/charge', {
-      method: 'POST',
-      headers: {'Content-Type': 'text/plain'},
-      body: token.id
-    })
 
-    if (response.ok) {
-      console.log('Purchase Complete!')
-      this.setState({complete: true})
+  handlePlaceOrderSubmit = async evt => {
+    evt.preventDefault()
+
+    const firstName = this.firstNameRef.current.value
+    const lastName = this.lastNameRef.current.value
+    const address = this.addressRef.current.value
+
+    if (!firstName || !lastName || !address) {
+      alert('Missing information!')
+      return
     }
+
+    let {token} = await this.props.stripe.createToken({name: 'Name'})
+    await this.props.completeOrder({address, stripeToken: token.id})
   }
+
   render() {
     return (
       <div>
         <div className="checkout" />
         <Heading>Place your order:</Heading>
-        <Form onSubmit={this.props.handlePlaceOrderSubmit}>
+        <Form onSubmit={this.handlePlaceOrderSubmit}>
           <FormField htmlFor="first-name" label="First Name">
-            <TextInput name="first-name" type="text" />
+            <TextInput name="first-name" type="text" ref={this.firstNameRef} />
           </FormField>
-          <FormField htmlFor="last-Name" label="Last Name">
-            <TextInput name="last-Name" type="text" />
+          <FormField htmlFor="last-name" label="Last Name">
+            <TextInput name="last-name" type="text" ref={this.lastNameRef} />
           </FormField>
           <FormField htmlFor="address" label="Shipping Address">
-            <TextInput name="address" type="text" />
+            <TextInput name="address" type="text" ref={this.addressRef} />
           </FormField>
           <h2 id="credit">Credit Card</h2>
           <CardElement style={{base: {fontSize: '20px'}}} />
@@ -58,12 +64,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handlePlaceOrderSubmit(evt) {
-      evt.preventDefault()
-      const address = evt.target.address.value
-      dispatch(completeOrder(address))
-
-      console.log('Place Order Button Clicked')
+    completeOrder(details) {
+      dispatch(completeOrder(details.address, details.stripeToken))
     }
   }
 }
