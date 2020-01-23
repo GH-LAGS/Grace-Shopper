@@ -58,7 +58,7 @@ router.post('/', async (req, res, next) => {
       order = await Order.update(
         {
           date: new Date().toString(),
-          address: req.address, //add address
+          address: req.body.address, //add address
           status: 'completed',
           totalPrice: totalPrice
         },

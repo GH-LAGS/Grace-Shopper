@@ -5,6 +5,7 @@ const GOT_CART = 'GOT_CART'
 const ADDED_TO_CART = 'ADDED_TO_CART'
 const REMOVED_FROM_CART = 'REMOVED_FROM_CART'
 const CHECKOUT = 'CHECKOUT'
+const CLEAR_CART = 'CLEAR_CART'
 
 // INITIAL STATE
 const defaultCart = []
@@ -20,6 +21,8 @@ const removedFromCart = recordId => ({
   recordId
 })
 const checkout = () => ({type: CHECKOUT})
+
+export const clearCart = () => ({type: CLEAR_CART})
 
 //THUNK CREATORS
 export const fetchCart = () => async dispatch => {
@@ -109,6 +112,8 @@ export default function(state = defaultCart, action) {
         ]
       }
     case CHECKOUT:
+      return []
+    case CLEAR_CART:
       return []
     default:
       return state
