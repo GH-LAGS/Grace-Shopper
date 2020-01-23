@@ -2,11 +2,9 @@ import React from 'react'
 import {connect} from 'react-redux'
 import Record from './record'
 import Featured from './featured-items'
-import axios from 'axios'
 import {fetchRecords} from '../store/record'
-import {Grommet, Box, Grid, Text, Button} from 'grommet'
 
-class AllProducts extends React.Component {
+export class UnconnectAllProducts extends React.Component {
   componentDidMount() {
     this.props.getAllRecords()
   }
@@ -54,4 +52,6 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AllProducts)
+export default connect(mapStateToProps, mapDispatchToProps)(
+  UnconnectAllProducts
+)

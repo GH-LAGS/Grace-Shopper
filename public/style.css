@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
 body {
-  font-family: sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background-color: #fcf1b3;
   margin: 0px;
 }
@@ -28,6 +30,9 @@ nav a {
 }
 
 .navLink:visited {
+  color: white;
+}
+.navLink {
   color: white;
 }
 
@@ -134,4 +139,11 @@ hr {
   bottom: 5%;
   right: 5%;
   background-color: transparent;
+}
+
+#name img {
+  border-radius: 1%;
+  height: 150px;
+  width: auto;
+  box-shadow: 10px 10px;
 }

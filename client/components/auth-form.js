@@ -40,12 +40,27 @@ const AuthForm = props => {
           <FormField htmlFor="password" label="Password">
             <TextInput name="password" type="password" />
           </FormField>
-          <Button type="submit" label={displayName} />
+          {/* <div>
+          <label htmlFor="email">
+            <small>Email</small>
+          </label>
+          <input name="email" type="text" />
+        </div> */}
+          {/* <div>
+          <label htmlFor="password">
+            <small>Password</small>
+          </label>
+          <input name="password" type="password" />
+        </div> */}
+          {/* <div> */}
+          <Button type="submit" label={displayName} color="#5FA782" />
+          {/* </div> */}
           {error && error.response && <div> {error.response.data} </div>}
         </Box>
       </Form>
       <Anchor
         href="/auth/google"
+        color="#5FA782"
         primary
         label={`${displayName} with Google`}
       />

@@ -7,7 +7,10 @@ import {fetchCart} from '../store/cart'
 /**
  * COMPONENT
  */
-class UserProfile extends React.Component {
+export class DisconnectedUserProfile extends React.Component {
+  constructor(props) {
+    super(props)
+  }
   componentDidMount() {
     this.props.getCart()
   }
@@ -39,11 +42,11 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(UserProfile)
+export default connect(mapState, mapDispatch)(DisconnectedUserProfile)
 
-/**
+/*
  * PROP TYPES
  */
-UserProfile.propTypes = {
+DisconnectedUserProfile.propTypes = {
   email: PropTypes.string
 }

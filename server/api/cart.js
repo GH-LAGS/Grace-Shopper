@@ -141,28 +141,29 @@ router.delete('/:id', async (req, res, next) => {
     if (req.user) {
       const order = await Order.findOne({
         where: {
-          userId: user.id,
+          userId: req.user.id,
           status: 'pending'
         }
       })
-      const recordOrders = await RecordOrders.findAll({
+      const recordOrders = await RecordOrder.findAll({
         where: {
           orderId: order.id
         }
       })
-      const foundRecordOrder = recordOrders.find(
-        recordOrder => recordOrder.recordId === req.params.id
+
+      const recordIndex = recordOrders.findIndex(
+        recordOrder => recordOrder.recordId == req.params.id
       )
+      const foundRecordOrder = recordOrders[recordIndex]
       if (foundRecordOrder.quantity === 1) {
         await foundRecordOrder.destroy()
       } else {
-        await foundRecord.decrement('quantity')
+        await foundRecordOrder.decrement('quantity')
       }
       res.sendStatus(204)
     } else {
       // Update session for guest
       const cartRecords = req.session.cart.cartRecords
-
       const recordIndex = cartRecords.findIndex(
         cartRecord => cartRecord.recordId == req.params.id
       )
