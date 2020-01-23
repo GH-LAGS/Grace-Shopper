@@ -52,9 +52,9 @@ export const removeFromCart = id => async dispatch => {
   }
 }
 
-export const completeOrder = address => async dispatch => {
+export const completeOrder = (address, stripeToken) => async dispatch => {
   try {
-    await Axios.post('/api/orders/', {address: address})
+    await Axios.post('/api/orders/', {address, stripeToken})
     dispatch(checkout())
   } catch (error) {
     console.log(error)

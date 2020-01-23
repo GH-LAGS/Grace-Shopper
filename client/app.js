@@ -1,6 +1,5 @@
 import React from 'react'
-import {Grommet} from 'grommet'
-
+import {Grommet, grommet} from 'grommet'
 import {Navbar} from './components'
 import Routes from './routes'
 

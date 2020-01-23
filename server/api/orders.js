@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const {Order, Record, RecordOrder} = require('../db/models')
+const stripe = require('stripe')('sk_test_ZC5QHOSLYhPmcCXrKe4nr9eb00T6agkUG8')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -23,6 +24,7 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
+    let totalPrice = 0
     let order
     // User -> change order to complete
     if (req.user) {
@@ -36,7 +38,6 @@ router.post('/', async (req, res, next) => {
       })
 
       // Calculate totalPrice
-      let totalPrice = 0
       const recordOrders = await RecordOrder.findAll({
         where: {
           orderId: order.id
@@ -47,6 +48,7 @@ router.post('/', async (req, res, next) => {
         const lineTotal = item.soldPrice * item.quantity
         totalPrice += lineTotal
       }
+
       // To-Do Should also decrease stock (Also check on front-end on all-products page)
       order = await Order.update(
         {
@@ -64,9 +66,7 @@ router.post('/', async (req, res, next) => {
       )
     } else {
       // Guest -> create complete order
-      console.log('CART', req.session.cart)
       const guestCart = req.session.cart.cartRecords
-      let totalPrice = 0
       order = await Order.create({
         date: new Date().toString(),
         address: req.body.address,
@@ -89,6 +89,13 @@ router.post('/', async (req, res, next) => {
       await order.save()
       req.session.cart = {cartRecords: []}
     }
+    // Handle Stripe order
+    let {status} = await stripe.charges.create({
+      amount: totalPrice,
+      currency: 'usd',
+      description: 'charge',
+      source: req.body.stripeToken
+    })
     res.status(200).send()
   } catch (err) {
     next(err)

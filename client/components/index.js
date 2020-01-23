@@ -12,3 +12,4 @@ export {default as OrderForm} from './order-form'
 
 export {default as AllProducts} from './all-products'
 export {default as Record} from './record'
+export {default as OrderSuccess} from './order-success'

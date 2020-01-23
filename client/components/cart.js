@@ -1,6 +1,7 @@
 import React from 'react'
 // import PropTypes from 'prop-types'
-import {Link} from 'react-router-dom'
+import {Elements, StripeProvider} from 'react-stripe-elements'
+
 import {connect} from 'react-redux'
 import {fetchCart, addToCart, removeFromCart} from '../store/cart'
 import {CartItem} from './cart-item'
@@ -52,7 +53,14 @@ class Cart extends React.Component {
           {!this.props.cart || this.props.cart.length === 0 ? (
             <div />
           ) : (
-            <div>
+            <div
+              style={{
+                alignSelf: 'flex-end',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-end'
+              }}
+            >
               {' '}
               <h3 id="totalPrice">Total Price: {`$${total}`}</h3>
               <Button
@@ -60,6 +68,7 @@ class Cart extends React.Component {
                 id="checkout"
                 label="Checkout"
                 color="#5FA782"
+                alignSelf="end"
                 onClick={this.handleSubmitClick}
               />
             </div>
@@ -67,7 +76,15 @@ class Cart extends React.Component {
         </div>
         <div>
           {this.props.cart.length ? (
-            this.state.checkout && <OrderForm />
+            this.state.checkout && (
+              <StripeProvider apiKey="pk_test_sdNI6NYvTEQrN4kHw0OCgN9a00uelbnBrP">
+                <div>
+                  <Elements>
+                    <OrderForm />
+                  </Elements>
+                </div>
+              </StripeProvider>
+            )
           ) : (
             <div> </div>
           )}
