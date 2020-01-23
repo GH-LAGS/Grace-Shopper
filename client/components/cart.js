@@ -1,6 +1,7 @@
 import React from 'react'
 // import PropTypes from 'prop-types'
-import {Link} from 'react-router-dom'
+import {Elements, StripeProvider} from 'react-stripe-elements'
+
 import {connect} from 'react-redux'
 import {fetchCart, addToCart, removeFromCart} from '../store/cart'
 import {CartItem} from './cart-item'
@@ -67,7 +68,16 @@ class Cart extends React.Component {
         </div>
         <div>
           {this.props.cart.length ? (
-            this.state.checkout && <OrderForm />
+            this.state.checkout && (
+              <StripeProvider apiKey="pk_test_sdNI6NYvTEQrN4kHw0OCgN9a00uelbnBrP">
+                <div className="example">
+                  <h1>Credit Card</h1>
+                  <Elements>
+                    <OrderForm />
+                  </Elements>
+                </div>
+              </StripeProvider>
+            )
           ) : (
             <div> </div>
           )}
