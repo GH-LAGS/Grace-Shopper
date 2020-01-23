@@ -1,27 +1,35 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {
-  Grommet,
-  Box,
-  Text,
-  Form,
-  Button,
-  FormField,
-  TextInput,
-  Heading
-} from 'grommet'
+import {Form, Button, FormField, TextInput, Heading} from 'grommet'
+import {CardElement, injectStripe} from 'react-stripe-elements'
 
 class OrderForm extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {complete: false}
+    this.submit = this.submit.bind(this)
   }
+  async submit(ev) {
+    let {token} = await this.props.stripe.createToken({name: 'Name'})
+    let response = await fetch('/charge', {
+      method: 'POST',
+      headers: {'Content-Type': 'text/plain'},
+      body: token.id
+    })
 
+    if (response.ok) {
+      console.log('Purchase Complete!')
+      this.setState({complete: true})
+    }
+  }
   render() {
     return (
       <div>
+        <div className="checkout">
+          <CardElement />
+        </div>
         <Heading>Place your order:</Heading>
-
         <Form onSubmit={this.props.handlePlaceOrderSubmit}>
           <FormField htmlFor="address" label="Shipping Address">
             <TextInput name="address" type="text" />
@@ -52,4 +60,6 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrderForm)
+export default injectStripe(
+  connect(mapStateToProps, mapDispatchToProps)(OrderForm)
+)
