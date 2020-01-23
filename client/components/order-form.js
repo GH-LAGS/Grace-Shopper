@@ -26,15 +26,20 @@ class OrderForm extends React.Component {
   render() {
     return (
       <div>
-        <div className="checkout">
-          <CardElement />
-        </div>
+        <div className="checkout" />
         <Heading>Place your order:</Heading>
         <Form onSubmit={this.props.handlePlaceOrderSubmit}>
+          <FormField htmlFor="first-name" label="First Name">
+            <TextInput name="first-name" type="text" />
+          </FormField>
+          <FormField htmlFor="last-Name" label="Last Name">
+            <TextInput name="last-Name" type="text" />
+          </FormField>
           <FormField htmlFor="address" label="Shipping Address">
             <TextInput name="address" type="text" />
           </FormField>
-
+          <h2 id="credit">Credit Card</h2>
+          <CardElement style={{base: {fontSize: '20px'}}} />
           <Button type="submit" label="Place Order" color="#5FA782" />
         </Form>
       </div>

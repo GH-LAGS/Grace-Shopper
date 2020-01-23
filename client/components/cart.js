@@ -53,7 +53,14 @@ class Cart extends React.Component {
           {!this.props.cart || this.props.cart.length === 0 ? (
             <div />
           ) : (
-            <div>
+            <div
+              style={{
+                alignSelf: 'flex-end',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-end'
+              }}
+            >
               {' '}
               <h3 id="totalPrice">Total Price: {`$${total}`}</h3>
               <Button
@@ -61,6 +68,7 @@ class Cart extends React.Component {
                 id="checkout"
                 label="Checkout"
                 color="#5FA782"
+                alignSelf="end"
                 onClick={this.handleSubmitClick}
               />
             </div>
@@ -70,8 +78,7 @@ class Cart extends React.Component {
           {this.props.cart.length ? (
             this.state.checkout && (
               <StripeProvider apiKey="pk_test_sdNI6NYvTEQrN4kHw0OCgN9a00uelbnBrP">
-                <div className="example">
-                  <h1>Credit Card</h1>
+                <div>
                   <Elements>
                     <OrderForm />
                   </Elements>

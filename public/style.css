@@ -147,3 +147,12 @@ hr {
   width: auto;
   box-shadow: 10px 10px;
 }
+
+.StripeElement {
+  width: 70%;
+  padding: 60px;
+}
+
+#credit {
+  margin-top: 50px;
+}
