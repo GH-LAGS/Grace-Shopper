@@ -1,5 +1,7 @@
 ## - LAGS VINYL is an e-commerce platform to connect you with rad records to add to your collection -
 
+Visit: https://grace-shopper-lags.herokuapp.com/
+
 🎧 LAGS VINYL was built by a team of 4 software engineering students as part of the immersive Grace Hopper Program at Fullstack Academy of Code, in New York City.
 
 ➤ Avelina Kim
